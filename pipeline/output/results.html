@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fog of War - LLM Geopolitical Forecasting Evaluation</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2234;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --green: #10b981;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --cyan: #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .header-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .header-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .header-meta .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+  }
+
+  /* Stat cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-card .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-card .sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .val-blue { color: var(--accent); }
+  .val-green { color: var(--green); }
+  .val-purple { color: var(--accent2); }
+  .val-amber { color: var(--amber); }
+
+  /* Section */
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-title .bar {
+    width: 3px;
+    height: 1.25rem;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* Model table */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.25rem;
+    text-align: left;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th:not(:first-child) {
+    text-align: center;
+  }
+
+  tbody td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  tbody td:not(:first-child) {
+    text-align: center;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: rgba(59, 130, 246, 0.04);
+  }
+
+  .model-name {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .model-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .badge-gold { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+  .badge-silver { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
+  .badge-bronze { background: rgba(180, 120, 80, 0.15); color: #d4a574; }
+  .badge-ours { background: rgba(139, 92, 246, 0.15); color: var(--accent2); }
+
+  .bar-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .mini-bar {
+    width: 60px;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .mini-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  /* Charts */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .chart-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 280px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--red));
+    border-radius: 1px;
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0.75rem 0 1.5rem 1.25rem;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -1.65rem;
+    top: 1.1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+  }
+
+  .tl-item.high::before { border-color: var(--green); background: rgba(16, 185, 129, 0.2); }
+  .tl-item.mid::before { border-color: var(--amber); background: rgba(245, 158, 11, 0.2); }
+  .tl-item.low::before { border-color: var(--red); background: rgba(239, 68, 68, 0.2); }
+
+  .tl-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .tl-node {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .tl-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .tl-event {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-metrics {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .tl-metrics span strong {
+    color: var(--text);
+  }
+
+  /* Thematic */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .theme-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .theme-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .theme-card .theme-acc {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .theme-card .theme-nodes {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Methodology note */
+  .note {
+    background: rgba(59, 130, 246, 0.06);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .note strong {
+    color: var(--text);
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .charts-grid { grid-template-columns: 1fr; }
+    .theme-grid { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 1.75rem; }
+    .header-meta { flex-direction: column; align-items: center; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-label">Research Evaluation</div>
+    <h1>Fog of War</h1>
+    <p>Evaluating LLM geopolitical forecasting under temporally-gated intelligence briefings across an 11-node simulated Middle East conflict scenario.</p>
+    <div class="header-meta">
+      <span><span class="dot"></span> Pipeline complete</span>
+      <span>11 temporal nodes (T0 - T10)</span>
+      <span>6 models evaluated</span>
+      <span>Feb 27 - Mar 7, 2026</span>
+    </div>
+  </div>
+
+  <!-- Top-level stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="label">Overall Accuracy</div>
+      <div class="value val-blue">90.5%</div>
+      <div class="sub">Across all models & nodes</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Best 1-MAE</div>
+      <div class="value val-green">0.850</div>
+      <div class="sub">Claude Opus 4.6 (higher is better)</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">News Corpus</div>
+      <div class="value val-purple">1,861</div>
+      <div class="sub">Articles from 12 outlets</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Questions Evaluated</div>
+      <div class="value val-amber">42</div>
+      <div class="sub">Verifiable binary questions</div>
+    </div>
+  </div>
+
+  <!-- Model performance table -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span>Model Performance Comparison</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>1-MAE</th>
+            <th>Accuracy</th>
+            <th>Brier Score</th>
+            <th>Consistency</th>
+            <th>Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(139,92,246,0.04)">
+            <td><div class="model-name">Claude Opus 4.6 <span class="model-badge badge-gold">1st</span> <span class="model-badge badge-ours">Ours</span></div></td>
+            <td><strong style="color:var(--green)">0.850</strong></td>
+            <td>
+              <div class="bar-cell">
+                93.2%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:93.2%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td><strong style="color:var(--green)">0.077</strong></td>
+            <td>0.89</td>
+            <td><strong style="color:var(--amber)">1</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Gemini 3 Flash <span class="model-badge badge-silver">2nd</span> <span class="model-badge" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Preview</span></div></td>
+            <td><strong>0.837</strong></td>
+            <td>
+              <div class="bar-cell">
+                90.9%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:90.9%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.046</td>
+            <td>0.81</td>
+            <td><strong>2</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Qwen 3.5-35B-A3B <span class="model-badge badge-bronze">3rd</span></div></td>
+            <td><strong>0.821</strong></td>
+            <td>
+              <div class="bar-cell">
+                95.5%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:95.5%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.079</td>
+            <td>0.86</td>
+            <td><strong>3</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Kimi K2.5</div></td>
+            <td>0.782</td>
+            <td>
+              <div class="bar-cell">
+                93.2%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:93.2%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.092</td>
+            <td>0.85</td>
+            <td><strong>4</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Claude Sonnet 4.6</div></td>
+            <td>0.757</td>
+            <td>
+              <div class="bar-cell">
+                84.1%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:84.1%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.126</td>
+            <td>0.71</td>
+            <td><strong>5</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">GPT-5.4</div></td>
+            <td>0.701</td>
+            <td>
+              <div class="bar-cell">
+                86.4%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:86.4%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.116</td>
+            <td>0.69</td>
+            <td><strong>6</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>1-MAE Calibration by Model (higher is better)</h3>
+      <div class="chart-container">
+        <canvas id="brierChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Accuracy by Temporal Node</h3>
+      <div class="chart-container">
+        <canvas id="nodeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thematic analysis -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span>Thematic Analysis</div>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <h4>Initial Outbreak</h4>
+        <div class="theme-acc val-green">97.2%</div>
+        <div class="theme-nodes">T0, T1, T2</div>
+      </div>
+      <div class="theme-card">
+        <h4>Threshold Crossings</h4>
+        <div class="theme-acc val-green">92.7%</div>
+        <div class="theme-nodes">T3, T6, T7, T8</div>
+      </div>
+      <div class="theme-card">
+        <h4>Economic Shockwaves</h4>
+        <div class="theme-acc val-amber">79.2%</div>
+        <div class="theme-nodes">T4, T5</div>
+      </div>
+      <div class="theme-card">
+        <h4>Political Signaling</h4>
+        <div class="theme-acc val-green">87.5%</div>
+        <div class="theme-nodes">T9, T10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario Timeline -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span>Scenario Timeline</div>
+    <div class="timeline">
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T0</span>
+          <span class="tl-date">Feb 27, 2026</span>
+        </div>
+        <div class="tl-event">Operation Epic Fury - Initial Military Operation</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>91.7%</strong></span>
+          <span>Brier: <strong>0.125</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T1</span>
+          <span class="tl-date">Feb 28, 2026</span>
+        </div>
+        <div class="tl-event">Israeli-US Coordinated Strikes on Iranian Facilities</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>100.0%</strong></span>
+          <span>Brier: <strong>0.012</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T2</span>
+          <span class="tl-date">Feb 28, 2026 12:00</span>
+        </div>
+        <div class="tl-event">Iranian Retaliatory Strikes</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>100.0%</strong></span>
+          <span>Brier: <strong>0.038</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T3</span>
+          <span class="tl-date">Mar 1, 2026</span>
+        </div>
+        <div class="tl-event">Missiles Toward British Military Bases</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>91.7%</strong></span>
+          <span>Brier: <strong>0.108</strong></span>
+        </div>
+      </div>
+      <div class="tl-item mid">
+        <div class="tl-header">
+          <span class="tl-node">T4</span>
+          <span class="tl-date">Mar 1, 2026 12:00</span>
+        </div>
+        <div class="tl-event">Major Oil Refinery / Tanker Attacked</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>75.0%</strong></span>
+          <span>Brier: <strong>0.150</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T5</span>
+          <span class="tl-date">Mar 2, 2026</span>
+        </div>
+        <div class="tl-event">Qatar Halts Energy Production/Exports</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>83.3%</strong></span>
+          <span>Brier: <strong>0.132</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T6</span>
+          <span class="tl-date">Mar 2, 2026 12:00</span>
+        </div>
+        <div class="tl-event">Natanz Nuclear Facility Damaged</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>91.7%</strong></span>
+          <span>Brier: <strong>0.030</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T7</span>
+          <span class="tl-date">Mar 3, 2026</span>
+        </div>
+        <div class="tl-event">US Suggests Citizen Evacuation</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>100.0%</strong></span>
+          <span>Brier: <strong>0.008</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T8</span>
+          <span class="tl-date">Mar 3, 2026 12:00</span>
+        </div>
+        <div class="tl-event">Nine-Country Coalition Ground Invasion</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>87.5%</strong></span>
+          <span>Brier: <strong>0.144</strong></span>
+        </div>
+      </div>
+      <div class="tl-item high">
+        <div class="tl-header">
+          <span class="tl-node">T9</span>
+          <span class="tl-date">Mar 3, 2026 18:00</span>
+        </div>
+        <div class="tl-event">Mojtaba Khamenei Assumes Leadership</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>91.7%</strong></span>
+          <span>Brier: <strong>0.118</strong></span>
+        </div>
+      </div>
+      <div class="tl-item mid">
+        <div class="tl-header">
+          <span class="tl-node">T10</span>
+          <span class="tl-date">Mar 7, 2026</span>
+        </div>
+        <div class="tl-event">Late Escalation - Additional Major Military Action</div>
+        <div class="tl-metrics">
+          <span>Accuracy: <strong>83.3%</strong></span>
+          <span>Brier: <strong>0.119</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Methodology note -->
+  <div class="note">
+    <strong>Methodology:</strong> Based on the paper "When AI Navigates the Fog of War". Each model receives temporally-gated intelligence briefings and must forecast escalating events across 11 nodes.
+    <strong>1-MAE</strong> (Calibration Consistency) is the paper's primary metric: 1 minus mean absolute error between predicted probability and binary outcome (higher = better).
+    <strong>Brier Score</strong> measures calibration (lower = better). <strong>Accuracy</strong> is binary prediction correctness.
+    Probabilities extracted via LLM (Gemini Flash) with qualitative language mapping. Ground truth from 42 verifiable binary questions.
+    Built on a corpus of 1,861 real news articles from 12 international outlets, temporally gated per node.
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Fog of War Evaluation Pipeline &middot; Generated 2026-03-29 &middot; 42 questions &middot; LLM extraction &middot; <a href="https://arxiv.org/abs/2603.16642">Paper</a></p>
+  </div>
+
+</div>
+
+<script>
+  const modelColors = {
+    'Qwen 3.5': '#10b981',
+    'Claude Sonnet 4.6': '#3b82f6',
+    'Kimi K2.5': '#06b6d4',
+    'GPT-5.4': '#f59e0b',
+    'Gemini 3 Flash': '#ef4444',
+    'Claude Opus 4.6': '#8b5cf6',
+  };
+
+  // Brier Score Chart
+  const brierCtx = document.getElementById('brierChart').getContext('2d');
+  new Chart(brierCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Opus 4.6', 'Gemini 3 Flash', 'Qwen 3.5', 'Kimi K2.5', 'Sonnet 4.6', 'GPT-5.4'],
+      datasets: [{
+        data: [0.850, 0.837, 0.821, 0.782, 0.757, 0.701],
+        backgroundColor: ['#8b5cf6', '#ef4444', '#10b981', '#06b6d4', '#3b82f6', '#f59e0b'],
+        borderRadius: 6,
+        barPercentage: 0.6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a2234',
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          borderColor: '#1e293b',
+          borderWidth: 1,
+          cornerRadius: 8,
+          padding: 12,
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 1,
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          ticks: { color: '#94a3b8', font: { size: 11 } }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: '#94a3b8', font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // Node accuracy chart
+  const nodeCtx = document.getElementById('nodeChart').getContext('2d');
+  new Chart(nodeCtx, {
+    type: 'line',
+    data: {
+      labels: ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
+      datasets: [{
+        label: 'Accuracy %',
+        data: [91.67, 100, 100, 91.67, 75, 83.33, 91.67, 100, 87.5, 91.67, 83.33],
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59,130,246,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: function(ctx) {
+          const val = ctx.raw;
+          if (val >= 60) return '#10b981';
+          if (val >= 30) return '#f59e0b';
+          return '#ef4444';
+        },
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a2234',
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          borderColor: '#1e293b',
+          borderWidth: 1,
+          cornerRadius: 8,
+          padding: 12,
+          callbacks: {
+            label: function(ctx) { return 'Accuracy: ' + ctx.raw.toFixed(1) + '%'; }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          ticks: {
+            color: '#94a3b8',
+            font: { size: 11 },
+            callback: v => v + '%'
+          }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: '#94a3b8', font: { size: 11 } }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

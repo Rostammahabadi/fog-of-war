@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Environment / secrets
+.env
+.env.*
+
+# Pipeline output (regenerable via `python main.py full --evaluate`)
+pipeline/output/*.json
+pipeline/output/*.md
+pipeline/output/*.log
+pipeline/output/*.bak
+# Keep the results dashboard
+!pipeline/output/results.html
+
+# Scraped data (regenerable via collection/scraping scripts)
+data/*.json
+data/*.log
+data/*.txt
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+.cursor/
