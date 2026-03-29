@@ -114,16 +114,31 @@ The pipeline evaluates these models via OpenRouter:
 
 To add a model, edit the `MODELS` list in `pipeline/config.py`.
 
-## News Corpus (optional)
+## News Corpus
 
-The root-level scripts collect and scrape news articles into a PostgreSQL database. This is optional — the pipeline can run using cached data.
+The pipeline needs news article data to build intelligence briefings. You have two options:
+
+### Option A: Pipeline fetch (simpler)
+
+The pipeline's `fetch` command pulls from public APIs (GDELT, yfinance) directly:
+
+```bash
+cd pipeline
+python main.py fetch
+```
+
+This gives you GDELT articles and financial data, which is enough to run the evaluation.
+
+### Option B: Full scraping pipeline (richer corpus)
+
+For a more complete corpus from 12+ news outlets, use the root-level scripts. This requires PostgreSQL.
 
 ```bash
 # Set up the database
 createdb fog_of_war
 psql fog_of_war < schema.sql
 
-# Collect article URLs
+# Collect article URLs from multiple sources
 python collect_google_news.py
 python collect_gdelt.py
 python collect_direct.py
@@ -131,6 +146,8 @@ python collect_direct.py
 # Scrape full text
 python scrape_articles.py
 ```
+
+Note: Some sources (Bloomberg, FT) have paywalls and may return limited content.
 
 ## Architecture
 
