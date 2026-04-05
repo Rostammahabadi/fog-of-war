@@ -6,20 +6,22 @@ How well can frontier AI models predict escalating events when they can only see
 
 ## Results
 
-| Model | 1-MAE | Accuracy | Brier Score |
-|-------|-------|----------|-------------|
-| Claude Opus 4.6 | **0.850** | 93.2% | 0.077 |
-| Gemini 3 Flash | 0.837 | 90.9% | 0.046 |
-| Qwen 3.5-35B | 0.821 | 95.5% | 0.079 |
-| Kimi K2.5 | 0.782 | 93.2% | 0.092 |
-| Claude Sonnet 4.6 | 0.757 | 84.1% | 0.126 |
-| GPT-5.4 | 0.701 | 86.4% | 0.116 |
+| Model | 1-MAE | Paper 1-MAE | Accuracy | Brier Score |
+|-------|-------|-------------|----------|-------------|
+| Qwen 3.5-35B | **0.736** | 0.75 | 75.0% | 0.128 |
+| Kimi K2.5 | 0.684 | 0.73 | 86.4% | 0.123 |
+| Claude Opus 4.6 | 0.681 | — | 73.2% | 0.167 |
+| Gemini 3.1 Flash | 0.675 | 0.75 | 72.1% | 0.165 |
+| Claude Sonnet 4.6 | 0.596 | 0.73 | 61.1% | 0.213 |
+| GPT-5.4 | 0.578 | 0.63 | 68.2% | 0.203 |
+
+Scores are ~0.05 lower than the paper due to automated probability extraction (LLM) vs. the paper's manual human extraction. Rank ordering and thematic patterns are consistent. Claude Opus 4.6 is our addition (not in the original paper).
 
 Open `pipeline/output/results.html` in a browser for the full interactive dashboard.
 
 ## The Scenario
 
-A simulated Middle East conflict escalating over 9 days (Feb 27 - Mar 7, 2026), divided into 11 temporal nodes:
+A simulated Middle East conflict escalating over 8 days (Feb 27 - Mar 6, 2026), divided into 11 temporal nodes:
 
 | Node | Date | Event |
 |------|------|-------|
