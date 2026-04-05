@@ -56,9 +56,15 @@ pip install -r requirements.txt
 
 ### Environment
 
+Copy `.env.example` to `.env` and fill in your keys:
+
 ```bash
-export OPENROUTER_API_KEY="your-key-here"
-export OPENAI_API_KEY="your-key-here"  # optional, for direct OpenAI access
+cp .env.example .env
+```
+
+```
+OPENROUTER_API_KEY=your-key-here
+OPENAI_API_KEY=your-key-here  # optional, for direct OpenAI access
 ```
 
 ## Usage
