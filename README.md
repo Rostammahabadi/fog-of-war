@@ -31,9 +31,9 @@ A simulated Middle East conflict escalating over 9 days (Feb 27 - Mar 7, 2026), 
 | T5 | Mar 2 | Qatar halts energy production |
 | T6 | Mar 2 12:00 | Natanz nuclear facility damaged |
 | T7 | Mar 3 | US suggests citizen evacuation |
-| T8 | Mar 3 12:00 | Nine-country ground invasion |
+| T8 | Mar 3 12:00 | Nine countries involved; Israeli ground invasion |
 | T9 | Mar 3 18:00 | Mojtaba Khamenei becomes leader |
-| T10 | Mar 7 | Late escalation |
+| T10 | Mar 6 | Iranian apology to neighboring countries |
 
 At each node, models receive only intelligence published **before** that timestamp. 42 binary questions test whether they can forecast what happens next.
 
@@ -108,7 +108,7 @@ The pipeline evaluates these models via OpenRouter:
 - `anthropic/claude-opus-4-6`
 - `anthropic/claude-sonnet-4-6`
 - `openai/gpt-5.4`
-- `google/gemini-3-flash-preview`
+- `google/gemini-3.1-flash-lite-preview`
 - `qwen/qwen3.5-35b-a3b`
 - `moonshotai/kimi-k2.5`
 

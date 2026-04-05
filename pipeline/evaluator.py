@@ -90,11 +90,21 @@ class Evaluator:
                               ground_truth: Dict[str, Any],
                               node_id: str) -> Dict[str, Any]:
         """Evaluate a single model's predictions using LLM extraction and real ground truth."""
-        response_text = model_result.get('response') or ''
         model_name = model_result.get('model', 'unknown')
 
         # Get ground truth questions for this node
         node_questions = self.ground_truth.get(node_id, [])
+
+        # Build a mapping from question text to per-question response
+        # (new format: model_result has 'question_results' with per-question responses)
+        per_question_responses = {}
+        if 'question_results' in model_result:
+            for qr in model_result['question_results']:
+                if qr.get('success') and qr.get('question_type') == 'verifiable':
+                    per_question_responses[qr['question']] = qr.get('response', '')
+
+        # Fallback: concatenated response for old-format results
+        response_text = model_result.get('response') or ''
 
         # Extract probability for the node's primary question using LLM
         node_desc = NODE_DESCRIPTIONS.get(node_id, '')
@@ -104,10 +114,12 @@ class Evaluator:
         )
 
         # Build per-question predictions using LLM extraction
+        # Use per-question response if available (paper protocol), else fall back to full response
         question_results = []
         for q in node_questions:
+            q_response = per_question_responses.get(q["question"], response_text)
             q_extraction = self.extractor.extract_probability(
-                response_text, q["question"], model_name, node_id + f"_q{q['id']}"
+                q_response, q["question"], model_name, node_id + f"_q{q['id']}"
             )
             question_results.append({
                 'question_id': q['id'],
@@ -572,6 +584,10 @@ class Evaluator:
             }
         
         # Map nodes to themes per paper Table 8
+        # Theme I: Initial Outbreak (T0, T1, T2)
+        # Theme II: Threshold Crossings (T3, T6, T7, T8)
+        # Theme III: Economic Shockwaves (T4, T5)
+        # Theme IV: Political Signaling (T9, T10)
         theme_mapping = {
             'T0': 'Initial Outbreak',
             'T1': 'Initial Outbreak',
@@ -583,7 +599,7 @@ class Evaluator:
             'T7': 'Threshold Crossings',
             'T8': 'Threshold Crossings',
             'T9': 'Political Signaling',
-            'T10': 'Political Signaling'
+            'T10': 'Political Signaling',
         }
         
         for node_id, node_eval in node_evaluations.items():

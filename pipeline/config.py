@@ -26,9 +26,9 @@ TEMPORAL_NODES = {
     "T5": datetime(2026, 3, 2, 0, 0, tzinfo=timezone.utc),    # Qatar Halts Energy Production
     "T6": datetime(2026, 3, 2, 12, 0, tzinfo=timezone.utc),   # Natanz Nuclear Facility Damaged
     "T7": datetime(2026, 3, 3, 0, 0, tzinfo=timezone.utc),    # US Suggests Citizen Evacuation
-    "T8": datetime(2026, 3, 3, 12, 0, tzinfo=timezone.utc),   # Nine Countries; Ground Invasion
+    "T8": datetime(2026, 3, 3, 12, 0, tzinfo=timezone.utc),   # Nine Countries Involved and Israeli Ground Invasion
     "T9": datetime(2026, 3, 3, 18, 0, tzinfo=timezone.utc),   # Mojtaba Khamenei Becomes Leader
-    "T10": datetime(2026, 3, 7, 0, 0, tzinfo=timezone.utc),   # Late Escalation Node
+    "T10": datetime(2026, 3, 6, 0, 0, tzinfo=timezone.utc),   # Iranian Apology to Neighboring Countries
 }
 
 # Node descriptions for ground truth events
@@ -41,9 +41,9 @@ NODE_DESCRIPTIONS = {
     "T5": "Qatar announces halt to energy production/exports",
     "T6": "Natanz nuclear facility sustains significant damage",
     "T7": "US State Department suggests citizen evacuation from region",
-    "T8": "Nine-country coalition announces ground invasion preparations",
+    "T8": "Nine countries involved and Israeli ground invasion",
     "T9": "Mojtaba Khamenei assumes leadership role in Iran",
-    "T10": "Late escalation - additional major military action",
+    "T10": "Iranian apology to neighboring countries",
 }
 
 # API Configuration
@@ -55,7 +55,7 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 MODELS = [
     # Paper baseline models
     "anthropic/claude-sonnet-4-6",
-    "google/gemini-3-flash-preview",
+    "google/gemini-3.1-flash-lite-preview",
     "openai/gpt-5.4",
     "qwen/qwen3.5-35b-a3b",
     "moonshotai/kimi-k2.5",
@@ -112,23 +112,89 @@ EVALUATION_THEMES = [
     "Political Signaling"
 ]
 
-# Questions from the paper (42 verifiable + 5 exploratory)
-VERIFIABLE_QUESTIONS = [
-    "Will there be a military strike within 24 hours?",
-    "Will oil prices rise by more than 5% tomorrow?",
-    "Will any country issue evacuation advisories?",
-    "Will there be diplomatic communications at the UN level?",
-    "Will any nuclear facilities be targeted?",
-    # ... (expand with all 42 questions from paper)
+# Paper's 42 verifiable questions, keyed by temporal node
+VERIFIABLE_QUESTIONS_BY_NODE = {
+    "T0": [
+        "Is the United States likely to conduct direct military strikes on Iranian territory?",
+        "Could the United States prioritize economic sanctions or diplomatic pressure over military action?",
+        "Does the announcement of Operation Epic Fury signal the beginning of a broader military conflict?",
+    ],
+    "T1": [
+        "Are the Israeli-U.S. strikes likely to escalate into a broader military campaign?",
+        "Is Iran likely to retaliate militarily in response to the strikes?",
+        "If Iran retaliates, is it more likely to indiscriminately bomb Israeli-U.S. territory than to target U.S. military bases?",
+        "Could Gulf states become direct targets of Iranian retaliation?",
+        "Is regional airspace in the Middle East likely to face widespread closures due to security risks?",
+    ],
+    "T2": [
+        "Are the Iranian strikes likely to remain symbolic retaliation without sustained military operations?",
+        "Could Iran attempt to disrupt shipping through the Strait of Hormuz?",
+        "Are other countries in the region likely to become directly involved in the conflict?",
+        "Is large-scale closure of Middle Eastern airspace likely following these strikes?",
+        "Could the conflict trigger internal rebellion within Iran?",
+    ],
+    "T3": [
+        "Is the United Kingdom likely to become directly involved in the conflict?",
+        "Is NATO likely to become involved, expanding the conflict into the Mediterranean theater?",
+        "Could the conflict disrupt commercial shipping or maritime security in the Mediterranean?",
+    ],
+    "T4": [
+        "Is Iran likely to continue targeting oil tankers in an attempt to disrupt traffic through the Strait of Hormuz?",
+        "Could international naval forces establish escort missions to protect commercial shipping?",
+        "Could American naval forces establish escort missions to protect commercial shipping?",
+        "Are energy facilities such as refineries, desalination plants, and oil terminals likely to become primary targets?",
+        "Could these attacks lead to significant volatility in global oil prices?",
+    ],
+    "T5": [
+        "Could Qatar's decision lead to natural gas shortages in Europe or Asia?",
+        "Are global natural gas prices likely to increase significantly as a result?",
+        "Could other LNG facilities or energy infrastructure in the Gulf region become targets?",
+        "Are major energy-importing countries likely to seek alternative supply sources?",
+    ],
+    "T6": [
+        "Are the United States and Israel likely to continue targeting Iranian nuclear facilities?",
+        "Will Israel's nuclear-related infrastructure be damaged?",
+        "Is Iran likely to withdraw from nuclear non-proliferation commitments?",
+        "Could nuclear weapons be used as part of the conflict?",
+    ],
+    "T7": [
+        "Are other countries likely to begin evacuating their citizens from the region as well?",
+        "Could the United States deploy ground forces if the conflict escalates further?",
+        "Are foreign governments likely to close or reduce operations at diplomatic missions in the region?",
+    ],
+    "T8": [
+        "Is the conflict likely to expand further, involving additional countries?",
+        "Could multiple countries initiate ground operations as the war escalates?",
+        "Is Iran likely to increase military or logistical support for Hezbollah?",
+    ],
+    "T9": [
+        "Is the new leadership more likely to escalate military retaliation rather than pursue negotiations?",
+        "Are the United States and Israel likely to target the new leadership structure in further strikes?",
+        "Could the leadership transition trigger domestic unrest or protests in Iran?",
+    ],
+    "T10": [
+        "Is Iran likely to reduce or halt attacks on neighboring Gulf states?",
+        "Could Iran begin pursuing ceasefire negotiations or diplomatic talks?",
+        "Are international actors such as the EU or the United Nations likely to push for negotiations following this signal?",
+        "Could the overall intensity of the conflict begin to decrease?",
+    ],
+}
+
+# Flat list for backward compatibility
+VERIFIABLE_QUESTIONS = [q for qs in VERIFIABLE_QUESTIONS_BY_NODE.values() for q in qs]
+
+# Paper's 5 general exploratory questions (asked at every node)
+EXPLORATORY_QUESTIONS = [
+    "What are the potential future actions by the United States and Israel?",
+    "What are the potential future actions by Iran?",
+    "What are the potential involvement or reactions from other major countries?",
+    "Will the conflict escalate into a global war?",
+    "What is the most probable pathway to de-escalation or resolution of the Iran-US conflict, and what is a realistic timeline?",
 ]
 
-EXPLORATORY_QUESTIONS = [
-    "What is the most likely escalation scenario in the next 72 hours?",
-    "Which regional actor is most likely to intervene next?",
-    "What economic sectors will be most affected?",
-    "How will alliance structures shift?",
-    "What are the long-term geopolitical implications?"
-]
+# Inference parameters (paper: temperature 0.3, max tokens 2048, no system prompt)
+DEFAULT_TEMPERATURE = 0.3
+MAX_RESPONSE_TOKENS = 2048
 
 # Rate limiting
 RATE_LIMIT_DELAY = 1.0  # seconds between API calls

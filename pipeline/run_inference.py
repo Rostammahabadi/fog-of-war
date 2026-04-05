@@ -18,7 +18,8 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from config import (
     OPENROUTER_API_KEY, OPENAI_API_KEY, OPENROUTER_BASE_URL,
     MODELS, TEMPORAL_NODES, OUTPUT_DIR, RATE_LIMIT_DELAY,
-    MAX_RETRIES, TIMEOUT
+    MAX_RETRIES, TIMEOUT, DEFAULT_TEMPERATURE, MAX_RESPONSE_TOKENS,
+    VERIFIABLE_QUESTIONS_BY_NODE, EXPLORATORY_QUESTIONS
 )
 from data_fetcher import DataFetcher
 from context_builder import ContextBuilder
@@ -59,19 +60,19 @@ class LLMRunner:
     
     @retry(stop=stop_after_attempt(MAX_RETRIES),
            wait=wait_exponential(multiplier=1, min=4, max=10))
-    def _make_llm_request(self, client: OpenAI, model: str, 
-                         system_prompt: str, user_prompt: str,
-                         temperature: float = 0.7) -> Dict[str, Any]:
+    def _make_llm_request(self, client: OpenAI, model: str,
+                         user_prompt: str,
+                         temperature: float = DEFAULT_TEMPERATURE) -> Dict[str, Any]:
         """
         Make LLM API request with retry logic.
-        
+        Paper protocol: no system prompt, single user message only.
+
         Args:
             client: OpenAI client instance
             model: Model identifier
-            system_prompt: System prompt
-            user_prompt: User prompt
-            temperature: Sampling temperature
-            
+            user_prompt: User prompt (context + question)
+            temperature: Sampling temperature (paper: 0.3)
+
         Returns:
             API response dictionary
         """
@@ -79,14 +80,13 @@ class LLMRunner:
             response = client.chat.completions.create(
                 model=model,
                 messages=[
-                    {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ],
                 temperature=temperature,
-                max_tokens=12000,
+                max_tokens=MAX_RESPONSE_TOKENS,
                 timeout=TIMEOUT
             )
-            
+
             return {
                 "success": True,
                 "response": response.choices[0].message.content,
@@ -94,28 +94,26 @@ class LLMRunner:
                 "usage": response.usage.model_dump() if response.usage else None,
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
-            
+
         except Exception as e:
             logger.error(f"LLM request failed for {model}: {e}")
             raise
     
-    def run_single_inference(self, model: str, system_prompt: str, user_prompt: str,
-                           temperature: float = 0.7) -> Dict[str, Any]:
+    def run_single_inference(self, model: str, user_prompt: str,
+                           temperature: float = DEFAULT_TEMPERATURE) -> Dict[str, Any]:
         """
-        Run inference on a single model.
-        
+        Run inference on a single model (paper protocol: no system prompt).
+
         Args:
             model: Model identifier
-            system_prompt: System prompt
-            user_prompt: User prompt  
-            temperature: Sampling temperature
-            
+            user_prompt: User prompt (context + question)
+            temperature: Sampling temperature (paper: 0.3)
+
         Returns:
             Inference result dictionary
         """
         logger.info(f"Running inference on {model}")
-        
-        # Determine which client to use
+
         # Route through OpenRouter for all provider-prefixed models (e.g. openai/gpt-5.4)
         # Only use direct OpenAI client for bare model names (e.g. gpt-5.4)
         client = None
@@ -123,7 +121,7 @@ class LLMRunner:
             client = self.openai_client
         else:
             client = self.openrouter_client
-        
+
         if not client:
             logger.error(f"No client available for model {model}")
             return {
@@ -131,17 +129,16 @@ class LLMRunner:
                 "error": "No API client available",
                 "model": model
             }
-        
+
         try:
             # Rate limiting
             time.sleep(RATE_LIMIT_DELAY)
-            
-            result = self._make_llm_request(client, model, system_prompt, 
-                                          user_prompt, temperature)
-            
+
+            result = self._make_llm_request(client, model, user_prompt, temperature)
+
             logger.info(f"Inference completed for {model}")
             return result
-            
+
         except Exception as e:
             logger.error(f"Inference failed for {model}: {e}")
             return {
@@ -152,28 +149,32 @@ class LLMRunner:
             }
     
     def run_node_analysis(self, node_id: str, intelligence_briefing: Dict[str, Any],
-                         models: List[str], temperature: float = 0.7,
+                         models: List[str], temperature: float = DEFAULT_TEMPERATURE,
                          save_results: bool = True) -> Dict[str, Any]:
         """
         Run LLM analysis for a specific temporal node.
-        
+        Paper protocol: each question is posed independently (separate API call).
+
         Args:
             node_id: Temporal node identifier (T0, T1, etc.)
             intelligence_briefing: Intelligence briefing from ContextBuilder
             models: List of models to run
-            temperature: Sampling temperature
+            temperature: Sampling temperature (paper: 0.3)
             save_results: Whether to save results to disk
-            
+
         Returns:
             Combined results from all models
         """
-        logger.info(f"Running node analysis for {node_id} with {len(models)} models")
-        
-        # Build prompts for this node
-        system_prompt = self.prompt_builder.build_system_prompt()
-        user_prompt = self.prompt_builder.build_prompt_for_node(node_id, intelligence_briefing)
-        
-        # Run inference on all models
+        # Get node-specific verifiable questions + exploratory questions
+        node_questions = VERIFIABLE_QUESTIONS_BY_NODE.get(node_id, [])
+        all_questions = node_questions + EXPLORATORY_QUESTIONS
+
+        logger.info(f"Running node analysis for {node_id} with {len(models)} models, "
+                    f"{len(all_questions)} questions each")
+
+        # Build context text once (shared across all questions for this node)
+        context_text = self.prompt_builder.build_context_text(intelligence_briefing)
+
         results = {
             'node_id': node_id,
             'target_date': intelligence_briefing.get('target_date'),
@@ -182,31 +183,62 @@ class LLMRunner:
             'metadata': {
                 'total_models': len(models),
                 'successful_models': 0,
-                'failed_models': 0
+                'failed_models': 0,
+                'questions_per_model': len(all_questions),
+                'verifiable_questions': len(node_questions),
+                'exploratory_questions': len(EXPLORATORY_QUESTIONS),
             }
         }
-        
+
         for model in models:
-            result = self.run_single_inference(model, system_prompt, user_prompt, temperature)
-            
-            if result.get('success'):
+            model_question_results = []
+            model_success = True
+
+            for i, question in enumerate(all_questions):
+                is_verifiable = i < len(node_questions)
+                user_prompt = self.prompt_builder.build_paper_prompt(context_text, question)
+
+                result = self.run_single_inference(model, user_prompt, temperature)
+
+                model_question_results.append({
+                    'question': question,
+                    'question_type': 'verifiable' if is_verifiable else 'exploratory',
+                    'success': result.get('success', False),
+                    'response': result.get('response', ''),
+                    'usage': result.get('usage'),
+                    'timestamp': result.get('timestamp'),
+                })
+
+                if not result.get('success'):
+                    model_success = False
+
+            if model_success:
                 results['metadata']['successful_models'] += 1
             else:
                 results['metadata']['failed_models'] += 1
-            
-            results['model_results'][model] = result
-        
+
+            results['model_results'][model] = {
+                'success': model_success,
+                'model': model,
+                'question_results': model_question_results,
+                # Concatenated response for backward compatibility with evaluator
+                'response': '\n\n---\n\n'.join(
+                    f"Q: {qr['question']}\n\n{qr['response']}"
+                    for qr in model_question_results if qr['success']
+                ),
+            }
+
         # Save results if requested
         if save_results:
             self._save_node_results(node_id, results)
-        
+
         logger.info(f"Node analysis complete for {node_id}: "
                    f"{results['metadata']['successful_models']}/{len(models)} models succeeded")
-        
+
         return results
     
     def run_temporal_sequence(self, nodes: List[str], data: Dict[str, Any],
-                            models: List[str], temperature: float = 0.7,
+                            models: List[str], temperature: float = DEFAULT_TEMPERATURE,
                             save_individual: bool = True) -> Dict[str, Any]:
         """
         Run LLM inference across temporal sequence.
@@ -272,7 +304,7 @@ class LLMRunner:
         return sequence_results
     
     def run_full_pipeline(self, models: Optional[List[str]] = None,
-                         temperature: float = 0.7, 
+                         temperature: float = DEFAULT_TEMPERATURE,
                          fetch_fresh_data: bool = False) -> Dict[str, Any]:
         """
         Run complete end-to-end pipeline.
@@ -486,13 +518,15 @@ if __name__ == "__main__":
     
     if available_models:
         print(f"Testing with models: {available_models}")
-        
-        # Test single inference
-        system_prompt = runner.prompt_builder.build_system_prompt()
-        user_prompt = runner.prompt_builder.build_user_prompt(test_briefing)
-        
+
+        # Test single inference (paper protocol: no system prompt)
+        user_prompt = runner.prompt_builder.build_paper_prompt(
+            str(test_briefing),
+            "What is the probability of military escalation within 24 hours?"
+        )
+
         result = runner.run_single_inference(
-            available_models[0], system_prompt, user_prompt
+            available_models[0], user_prompt
         )
         
         print(f"Test inference result: {result.get('success', False)}")

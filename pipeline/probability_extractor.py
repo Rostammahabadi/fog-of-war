@@ -122,7 +122,7 @@ class LLMProbabilityExtractor:
             return {"probability": None, "raw_quote": None, "source": "none"}
 
     def _cache_key(self, model_name: str, node_id: str, response_text: str) -> str:
-        content = f"{model_name}|{node_id}|{response_text[:200]}"
+        content = f"{model_name}|{node_id}|{response_text[:500]}"
         return hashlib.sha256(content.encode()).hexdigest()[:16]
 
     def _load_cache(self) -> Dict:

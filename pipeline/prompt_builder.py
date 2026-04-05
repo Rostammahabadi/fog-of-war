@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
-from config import VERIFIABLE_QUESTIONS, EXPLORATORY_QUESTIONS
+from config import VERIFIABLE_QUESTIONS, EXPLORATORY_QUESTIONS, VERIFIABLE_QUESTIONS_BY_NODE
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,39 @@ class PromptBuilder:
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-    
+
+    # --- Paper-aligned prompt methods (primary) ---
+
+    def build_context_text(self, intelligence_briefing: Dict[str, Any]) -> str:
+        """
+        Build the context portion of the prompt from the intelligence briefing.
+        Paper format: articles sorted reverse-chronologically as
+        [YYYY-MM-DD HH:MM] Title (Source)\\n<body up to 2000 chars>
+        """
+        return self._format_briefing_for_prompt(intelligence_briefing)
+
+    def build_paper_prompt(self, context_text: str, question: str) -> str:
+        """
+        Build a single prompt matching the paper's exact template.
+        Paper protocol: no system prompt; one user message per question.
+
+        Template:
+            {context}
+            Based on the above publicly available information, try to analyze
+            the current situation and potential future direction, then respond
+            to this question: {question}
+            At the end of your response, also provide the probability.
+        """
+        return (
+            f"{context_text}\n"
+            f"Based on the above publicly available information, try to analyze "
+            f"the current situation and potential future direction, then respond "
+            f"to this question: {question}\n"
+            f"At the end of your response, also provide the probability."
+        )
+
+    # --- Legacy prompt methods (kept for backward compatibility) ---
+
     def build_system_prompt(self) -> str:
         """
         Build the system prompt that establishes the LLM's role.
