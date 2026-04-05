@@ -8,7 +8,7 @@ from typing import Dict, List, Any
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 # Paths
 PIPELINE_ROOT = Path(__file__).parent
@@ -199,8 +199,9 @@ EXPLORATORY_QUESTIONS = [
 DEFAULT_TEMPERATURE = 0.3
 MAX_RESPONSE_TOKENS = 2048
 
-# Rate limiting
-RATE_LIMIT_DELAY = 1.0  # seconds between API calls
+# Rate limiting / concurrency
+MAX_CONCURRENT_REQUESTS = 10  # parallel API calls per node
+RATE_LIMIT_DELAY = 0.2  # seconds between API calls (lower since we're parallel now)
 MAX_RETRIES = 3
 TIMEOUT = 120  # LLM responses can be long; 30s was too short
 

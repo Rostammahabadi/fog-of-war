@@ -7,6 +7,7 @@ import json
 import logging
 import time
 import asyncio
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
@@ -19,7 +20,8 @@ from config import (
     OPENROUTER_API_KEY, OPENAI_API_KEY, OPENROUTER_BASE_URL,
     MODELS, TEMPORAL_NODES, OUTPUT_DIR, RATE_LIMIT_DELAY,
     MAX_RETRIES, TIMEOUT, DEFAULT_TEMPERATURE, MAX_RESPONSE_TOKENS,
-    VERIFIABLE_QUESTIONS_BY_NODE, EXPLORATORY_QUESTIONS
+    VERIFIABLE_QUESTIONS_BY_NODE, EXPLORATORY_QUESTIONS,
+    MAX_CONCURRENT_REQUESTS
 )
 from data_fetcher import DataFetcher
 from context_builder import ContextBuilder
@@ -168,9 +170,12 @@ class LLMRunner:
         # Get node-specific verifiable questions + exploratory questions
         node_questions = VERIFIABLE_QUESTIONS_BY_NODE.get(node_id, [])
         all_questions = node_questions + EXPLORATORY_QUESTIONS
+        num_verifiable = len(node_questions)
+        total_calls = len(models) * len(all_questions)
 
-        logger.info(f"Running node analysis for {node_id} with {len(models)} models, "
-                    f"{len(all_questions)} questions each")
+        logger.info(f"Running node analysis for {node_id}: {len(models)} models × "
+                    f"{len(all_questions)} questions = {total_calls} calls "
+                    f"(max {MAX_CONCURRENT_REQUESTS} concurrent)")
 
         # Build context text once (shared across all questions for this node)
         context_text = self.prompt_builder.build_context_text(intelligence_briefing)
@@ -185,20 +190,42 @@ class LLMRunner:
                 'successful_models': 0,
                 'failed_models': 0,
                 'questions_per_model': len(all_questions),
-                'verifiable_questions': len(node_questions),
+                'verifiable_questions': num_verifiable,
                 'exploratory_questions': len(EXPLORATORY_QUESTIONS),
             }
         }
 
+        # Build all (model, question_index, prompt) jobs up front
+        jobs = []
+        for model in models:
+            for i, question in enumerate(all_questions):
+                user_prompt = self.prompt_builder.build_paper_prompt(context_text, question)
+                jobs.append((model, i, question, user_prompt))
+
+        # Run all jobs in parallel with a thread pool
+        job_results = {}
+        with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_REQUESTS) as pool:
+            future_to_job = {
+                pool.submit(self.run_single_inference, model, prompt, temperature): (model, idx, question)
+                for model, idx, question, prompt in jobs
+            }
+            for future in as_completed(future_to_job):
+                model, idx, question = future_to_job[future]
+                try:
+                    result = future.result()
+                except Exception as e:
+                    logger.error(f"Parallel call failed for {model} q{idx}: {e}")
+                    result = {"success": False, "error": str(e), "model": model}
+                job_results[(model, idx)] = (question, result)
+
+        # Reassemble results by model, preserving question order
         for model in models:
             model_question_results = []
             model_success = True
 
-            for i, question in enumerate(all_questions):
-                is_verifiable = i < len(node_questions)
-                user_prompt = self.prompt_builder.build_paper_prompt(context_text, question)
-
-                result = self.run_single_inference(model, user_prompt, temperature)
+            for i in range(len(all_questions)):
+                question, result = job_results[(model, i)]
+                is_verifiable = i < num_verifiable
 
                 model_question_results.append({
                     'question': question,
