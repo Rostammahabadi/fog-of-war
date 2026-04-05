@@ -35,7 +35,7 @@ A simulated Middle East conflict escalating over 8 days (Feb 27 - Mar 6, 2026), 
 | T7 | Mar 3 | US suggests citizen evacuation |
 | T8 | Mar 3 12:00 | Nine countries involved; Israeli ground invasion |
 | T9 | Mar 3 18:00 | Mojtaba Khamenei becomes leader |
-| T10 | Mar 6 | Iranian apology to neighboring countries |
+| T10 | Mar 7 | Iranian apology to neighboring countries |
 
 At each node, models receive only intelligence published **before** that timestamp. 42 binary questions test whether they can forecast what happens next.
 

@@ -364,7 +364,6 @@ class DataFetcher:
                        LEFT(full_text, 2000) as body
                 FROM articles
                 WHERE scrape_status = 'success'
-                  AND word_count > 200
                   AND published_at >= '2026-02-01' AND published_at < '2026-03-08'
                 ORDER BY published_at DESC
             """)

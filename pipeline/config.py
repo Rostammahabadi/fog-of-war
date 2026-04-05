@@ -31,7 +31,7 @@ TEMPORAL_NODES = {
     "T7": datetime(2026, 3, 3, 0, 0, tzinfo=timezone.utc),    # US Suggests Citizen Evacuation
     "T8": datetime(2026, 3, 3, 12, 0, tzinfo=timezone.utc),   # Nine Countries Involved and Israeli Ground Invasion
     "T9": datetime(2026, 3, 3, 18, 0, tzinfo=timezone.utc),   # Mojtaba Khamenei Becomes Leader
-    "T10": datetime(2026, 3, 6, 0, 0, tzinfo=timezone.utc),   # Iranian Apology to Neighboring Countries
+    "T10": datetime(2026, 3, 7, 0, 0, tzinfo=timezone.utc),   # Iranian Apology to Neighboring Countries
 }
 
 # Node descriptions for ground truth events

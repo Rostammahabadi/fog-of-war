@@ -125,7 +125,7 @@ class ContextBuilder:
     def _extract_article_date(self, article: Dict) -> Optional[datetime]:
         """Extract publication date from article metadata."""
         # Try various date fields common in news articles
-        date_fields = ['published_date', 'date_published', 'pub_date', 'timestamp', 'date']
+        date_fields = ['published_at', 'published_date', 'date_published', 'pub_date', 'timestamp', 'date']
         
         for field in date_fields:
             if field in article and article[field]:

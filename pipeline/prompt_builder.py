@@ -27,10 +27,19 @@ class PromptBuilder:
     def build_context_text(self, intelligence_briefing: Dict[str, Any]) -> str:
         """
         Build the context portion of the prompt from the intelligence briefing.
-        Paper format: articles sorted reverse-chronologically as
+        Paper format: only news articles sorted reverse-chronologically as
         [YYYY-MM-DD HH:MM] Title (Source)\\n<body up to 2000 chars>
+        No extra sections (economic, tactical, sentiment, etc.) per the paper.
         """
-        return self._format_briefing_for_prompt(intelligence_briefing)
+        news = intelligence_briefing.get('news_analysis', {})
+        articles_text = news.get('articles_text', [])
+        if not articles_text:
+            return "(No news articles available for this time period.)"
+        omitted = news.get('analysis', {}).get('omitted_count', 0)
+        result = "\n\n".join(articles_text)
+        if omitted > 0:
+            result += f"\n\n[...{omitted} older articles omitted]"
+        return result
 
     def build_paper_prompt(self, context_text: str, question: str) -> str:
         """
