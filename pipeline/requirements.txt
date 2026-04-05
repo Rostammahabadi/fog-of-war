@@ -11,6 +11,7 @@ lxml
 aiohttp
 asyncio-throttle
 tenacity
+python-dotenv
 matplotlib
 seaborn
 plotly
