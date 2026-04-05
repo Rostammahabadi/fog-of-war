@@ -247,6 +247,11 @@
     transition: width 0.6s ease;
   }
 
+  /* Paper comparison table */
+  .comparison-table td.better { color: var(--green); }
+  .comparison-table td.worse { color: var(--red); }
+  .comparison-table td.neutral { color: var(--text-muted); }
+
   /* Charts */
   .charts-grid {
     display: grid;
@@ -381,6 +386,12 @@
     margin-top: 0.35rem;
   }
 
+  .theme-card .theme-paper {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
   /* Footer */
   .footer {
     border-top: 1px solid var(--border);
@@ -434,7 +445,7 @@
       <span><span class="dot"></span> Pipeline complete</span>
       <span>11 temporal nodes (T0 - T10)</span>
       <span>6 models evaluated</span>
-      <span>Feb 27 - Mar 7, 2026</span>
+      <span>Feb 27 - Mar 6, 2026</span>
     </div>
   </div>
 
@@ -442,18 +453,18 @@
   <div class="stats-grid">
     <div class="stat-card">
       <div class="label">Overall Accuracy</div>
-      <div class="value val-blue">90.5%</div>
+      <div class="value val-blue">72.5%</div>
       <div class="sub">Across all models & nodes</div>
     </div>
     <div class="stat-card">
       <div class="label">Best 1-MAE</div>
-      <div class="value val-green">0.850</div>
-      <div class="sub">Claude Opus 4.6 (higher is better)</div>
+      <div class="value val-green">0.736</div>
+      <div class="sub">Qwen 3.5-35B (higher is better)</div>
     </div>
     <div class="stat-card">
-      <div class="label">News Corpus</div>
-      <div class="value val-purple">1,861</div>
-      <div class="sub">Articles from 12 outlets</div>
+      <div class="label">Paper Avg 1-MAE</div>
+      <div class="value val-purple">0.72</div>
+      <div class="sub">Cross-model average (paper)</div>
     </div>
     <div class="stat-card">
       <div class="label">Questions Evaluated</div>
@@ -471,89 +482,89 @@
           <tr>
             <th>Model</th>
             <th>1-MAE</th>
+            <th>Paper 1-MAE</th>
             <th>Accuracy</th>
             <th>Brier Score</th>
-            <th>Consistency</th>
             <th>Rank</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="background:rgba(139,92,246,0.04)">
-            <td><div class="model-name">Claude Opus 4.6 <span class="model-badge badge-gold">1st</span> <span class="model-badge badge-ours">Ours</span></div></td>
-            <td><strong style="color:var(--green)">0.850</strong></td>
+          <tr>
+            <td><div class="model-name">Qwen 3.5-35B <span class="model-badge badge-gold">1st</span></div></td>
+            <td><strong style="color:var(--green)">0.736</strong></td>
+            <td>0.75</td>
             <td>
               <div class="bar-cell">
-                93.2%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:93.2%;background:var(--green)"></div></div>
+                75.0%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:75%;background:var(--green)"></div></div>
               </div>
             </td>
-            <td><strong style="color:var(--green)">0.077</strong></td>
-            <td>0.89</td>
+            <td>0.128</td>
             <td><strong style="color:var(--amber)">1</strong></td>
           </tr>
           <tr>
-            <td><div class="model-name">Gemini 3 Flash <span class="model-badge badge-silver">2nd</span> <span class="model-badge" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Preview</span></div></td>
-            <td><strong>0.837</strong></td>
-            <td>
-              <div class="bar-cell">
-                90.9%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:90.9%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.046</td>
-            <td>0.81</td>
-            <td><strong>2</strong></td>
-          </tr>
-          <tr>
-            <td><div class="model-name">Qwen 3.5-35B-A3B <span class="model-badge badge-bronze">3rd</span></div></td>
-            <td><strong>0.821</strong></td>
-            <td>
-              <div class="bar-cell">
-                95.5%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:95.5%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.079</td>
-            <td>0.86</td>
-            <td><strong>3</strong></td>
-          </tr>
-          <tr>
-            <td><div class="model-name">Kimi K2.5</div></td>
-            <td>0.782</td>
-            <td>
-              <div class="bar-cell">
-                93.2%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:93.2%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.092</td>
-            <td>0.85</td>
-            <td><strong>4</strong></td>
-          </tr>
-          <tr>
-            <td><div class="model-name">Claude Sonnet 4.6</div></td>
-            <td>0.757</td>
-            <td>
-              <div class="bar-cell">
-                84.1%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:84.1%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.126</td>
-            <td>0.71</td>
-            <td><strong>5</strong></td>
-          </tr>
-          <tr>
-            <td><div class="model-name">GPT-5.4</div></td>
-            <td>0.701</td>
+            <td><div class="model-name">Kimi K2.5 <span class="model-badge badge-silver">2nd</span></div></td>
+            <td><strong>0.684</strong></td>
+            <td>0.73</td>
             <td>
               <div class="bar-cell">
                 86.4%
                 <div class="mini-bar"><div class="mini-bar-fill" style="width:86.4%;background:var(--green)"></div></div>
               </div>
             </td>
-            <td>0.116</td>
-            <td>0.69</td>
+            <td>0.123</td>
+            <td><strong>2</strong></td>
+          </tr>
+          <tr style="background:rgba(139,92,246,0.04)">
+            <td><div class="model-name">Claude Opus 4.6 <span class="model-badge badge-bronze">3rd</span> <span class="model-badge badge-ours">Ours</span></div></td>
+            <td><strong>0.681</strong></td>
+            <td style="color:var(--text-muted)">&mdash;</td>
+            <td>
+              <div class="bar-cell">
+                73.2%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:73.2%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.167</td>
+            <td><strong>3</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Gemini 3.1 Flash <span class="model-badge" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Preview</span></div></td>
+            <td>0.675</td>
+            <td>0.75</td>
+            <td>
+              <div class="bar-cell">
+                72.1%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:72.1%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>0.165</td>
+            <td><strong>4</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Claude Sonnet 4.6</div></td>
+            <td>0.596</td>
+            <td>0.73</td>
+            <td>
+              <div class="bar-cell">
+                61.1%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:61.1%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>0.213</td>
+            <td><strong>5</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">GPT-5.4</div></td>
+            <td>0.578</td>
+            <td>0.63</td>
+            <td>
+              <div class="bar-cell">
+                68.2%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:68.2%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>0.203</td>
             <td><strong>6</strong></td>
           </tr>
         </tbody>
@@ -564,9 +575,9 @@
   <!-- Charts -->
   <div class="charts-grid">
     <div class="chart-card">
-      <h3>1-MAE Calibration by Model (higher is better)</h3>
+      <h3>1-MAE: Our Run vs Paper (higher is better)</h3>
       <div class="chart-container">
-        <canvas id="brierChart"></canvas>
+        <canvas id="comparisonChart"></canvas>
       </div>
     </div>
     <div class="chart-card">
@@ -583,23 +594,27 @@
     <div class="theme-grid">
       <div class="theme-card">
         <h4>Initial Outbreak</h4>
-        <div class="theme-acc val-green">97.2%</div>
+        <div class="theme-acc val-amber">62.6%</div>
         <div class="theme-nodes">T0, T1, T2</div>
+        <div class="theme-paper">Paper: 0.74</div>
       </div>
       <div class="theme-card">
         <h4>Threshold Crossings</h4>
-        <div class="theme-acc val-green">92.7%</div>
+        <div class="theme-acc val-green">75.4%</div>
         <div class="theme-nodes">T3, T6, T7, T8</div>
+        <div class="theme-paper">Paper: 0.67</div>
       </div>
       <div class="theme-card">
         <h4>Economic Shockwaves</h4>
-        <div class="theme-acc val-amber">79.2%</div>
+        <div class="theme-acc val-green">96.7%</div>
         <div class="theme-nodes">T4, T5</div>
+        <div class="theme-paper">Paper: 0.79</div>
       </div>
       <div class="theme-card">
         <h4>Political Signaling</h4>
-        <div class="theme-acc val-green">87.5%</div>
+        <div class="theme-acc val-amber">57.5%</div>
         <div class="theme-nodes">T9, T10</div>
+        <div class="theme-paper">Paper: 0.67</div>
       </div>
     </div>
   </div>
@@ -608,15 +623,15 @@
   <div class="section">
     <div class="section-title"><span class="bar"></span>Scenario Timeline</div>
     <div class="timeline">
-      <div class="tl-item high">
+      <div class="tl-item low">
         <div class="tl-header">
           <span class="tl-node">T0</span>
           <span class="tl-date">Feb 27, 2026</span>
         </div>
-        <div class="tl-event">Operation Epic Fury - Initial Military Operation</div>
+        <div class="tl-event">Operation Epic Fury</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>91.7%</strong></span>
-          <span>Brier: <strong>0.125</strong></span>
+          <span>Accuracy: <strong>27.8%</strong></span>
+          <span>Brier: <strong>0.405</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -626,8 +641,8 @@
         </div>
         <div class="tl-event">Israeli-US Coordinated Strikes on Iranian Facilities</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>100.0%</strong></span>
-          <span>Brier: <strong>0.012</strong></span>
+          <span>Accuracy: <strong>80.0%</strong></span>
+          <span>Brier: <strong>0.132</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -637,30 +652,30 @@
         </div>
         <div class="tl-event">Iranian Retaliatory Strikes</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>100.0%</strong></span>
-          <span>Brier: <strong>0.038</strong></span>
+          <span>Accuracy: <strong>80.0%</strong></span>
+          <span>Brier: <strong>0.146</strong></span>
         </div>
       </div>
-      <div class="tl-item high">
+      <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T3</span>
           <span class="tl-date">Mar 1, 2026</span>
         </div>
         <div class="tl-event">Missiles Toward British Military Bases</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>91.7%</strong></span>
-          <span>Brier: <strong>0.108</strong></span>
+          <span>Accuracy: <strong>69.4%</strong></span>
+          <span>Brier: <strong>0.157</strong></span>
         </div>
       </div>
-      <div class="tl-item mid">
+      <div class="tl-item high">
         <div class="tl-header">
           <span class="tl-node">T4</span>
           <span class="tl-date">Mar 1, 2026 12:00</span>
         </div>
-        <div class="tl-event">Major Oil Refinery / Tanker Attacked</div>
+        <div class="tl-event">Oil Refinery and Oil Tanker Attacked</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>75.0%</strong></span>
-          <span>Brier: <strong>0.150</strong></span>
+          <span>Accuracy: <strong>93.3%</strong></span>
+          <span>Brier: <strong>0.073</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -668,21 +683,21 @@
           <span class="tl-node">T5</span>
           <span class="tl-date">Mar 2, 2026</span>
         </div>
-        <div class="tl-event">Qatar Halts Energy Production/Exports</div>
+        <div class="tl-event">Qatar Halts Energy Production</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>83.3%</strong></span>
-          <span>Brier: <strong>0.132</strong></span>
+          <span>Accuracy: <strong>100.0%</strong></span>
+          <span>Brier: <strong>0.045</strong></span>
         </div>
       </div>
-      <div class="tl-item high">
+      <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T6</span>
           <span class="tl-date">Mar 2, 2026 12:00</span>
         </div>
         <div class="tl-event">Natanz Nuclear Facility Damaged</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>91.7%</strong></span>
-          <span>Brier: <strong>0.030</strong></span>
+          <span>Accuracy: <strong>62.5%</strong></span>
+          <span>Brier: <strong>0.202</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -690,10 +705,10 @@
           <span class="tl-node">T7</span>
           <span class="tl-date">Mar 3, 2026</span>
         </div>
-        <div class="tl-event">US Suggests Citizen Evacuation</div>
+        <div class="tl-event">US Begins Evacuation of Citizens</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>100.0%</strong></span>
-          <span>Brier: <strong>0.008</strong></span>
+          <span>Accuracy: <strong>80.6%</strong></span>
+          <span>Brier: <strong>0.121</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -701,32 +716,32 @@
           <span class="tl-node">T8</span>
           <span class="tl-date">Mar 3, 2026 12:00</span>
         </div>
-        <div class="tl-event">Nine-Country Coalition Ground Invasion</div>
+        <div class="tl-event">Nine Countries Involved; Israeli Ground Invasion</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>87.5%</strong></span>
-          <span>Brier: <strong>0.144</strong></span>
+          <span>Accuracy: <strong>88.9%</strong></span>
+          <span>Brier: <strong>0.071</strong></span>
         </div>
       </div>
-      <div class="tl-item high">
+      <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T9</span>
           <span class="tl-date">Mar 3, 2026 18:00</span>
         </div>
-        <div class="tl-event">Mojtaba Khamenei Assumes Leadership</div>
+        <div class="tl-event">Mojtaba Khamenei Becomes Supreme Leader</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>91.7%</strong></span>
-          <span>Brier: <strong>0.118</strong></span>
+          <span>Accuracy: <strong>50.0%</strong></span>
+          <span>Brier: <strong>0.281</strong></span>
         </div>
       </div>
       <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T10</span>
-          <span class="tl-date">Mar 7, 2026</span>
+          <span class="tl-date">Mar 6, 2026</span>
         </div>
-        <div class="tl-event">Late Escalation - Additional Major Military Action</div>
+        <div class="tl-event">Iranian Apology to Neighboring Countries</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>83.3%</strong></span>
-          <span>Brier: <strong>0.119</strong></span>
+          <span>Accuracy: <strong>65.0%</strong></span>
+          <span>Brier: <strong>0.212</strong></span>
         </div>
       </div>
     </div>
@@ -734,48 +749,58 @@
 
   <!-- Methodology note -->
   <div class="note">
-    <strong>Methodology:</strong> Based on the paper "When AI Navigates the Fog of War". Each model receives temporally-gated intelligence briefings and must forecast escalating events across 11 nodes.
+    <strong>Methodology:</strong> Based on the paper <a href="https://arxiv.org/abs/2603.16642" style="color:var(--accent)">"When AI Navigates the Fog of War"</a> (Li et al., 2026).
+    Each model receives temporally-gated intelligence briefings and independently answers 42 verifiable binary questions across 11 nodes, matching the paper's single-question protocol (no system prompt, temperature 0.3, max 2048 tokens).
     <strong>1-MAE</strong> (Calibration Consistency) is the paper's primary metric: 1 minus mean absolute error between predicted probability and binary outcome (higher = better).
-    <strong>Brier Score</strong> measures calibration (lower = better). <strong>Accuracy</strong> is binary prediction correctness.
-    Probabilities extracted via LLM (Gemini Flash) with qualitative language mapping. Ground truth from 42 verifiable binary questions.
-    Built on a corpus of 1,861 real news articles from 12 international outlets, temporally gated per node.
+    <strong>Brier Score</strong> measures calibration (lower = better). <strong>Accuracy</strong> is binary prediction correctness (p > 0.5).
+    <br><br>
+    <strong>Key difference from paper:</strong> The paper used manual human probability extraction by two researchers. This pipeline uses automated LLM-based extraction (Claude Haiku 4.5), which adds extraction noise and likely explains the ~0.05 lower scores across the board. Rank ordering and thematic patterns are consistent with the paper's findings.
+    Claude Opus 4.6 is our addition (not evaluated in the original paper).
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    <p>Fog of War Evaluation Pipeline &middot; Generated 2026-03-29 &middot; 42 questions &middot; LLM extraction &middot; <a href="https://arxiv.org/abs/2603.16642">Paper</a></p>
+    <p>Fog of War Evaluation Pipeline &middot; Run 2026-04-05 &middot; 42 questions &middot; 6 models &middot; 11 nodes &middot; <a href="https://arxiv.org/abs/2603.16642">Paper</a> &middot; <a href="https://github.com/RostamMahabadi/fog-of-war">GitHub</a></p>
   </div>
 
 </div>
 
 <script>
-  const modelColors = {
-    'Qwen 3.5': '#10b981',
-    'Claude Sonnet 4.6': '#3b82f6',
-    'Kimi K2.5': '#06b6d4',
-    'GPT-5.4': '#f59e0b',
-    'Gemini 3 Flash': '#ef4444',
-    'Claude Opus 4.6': '#8b5cf6',
-  };
-
-  // Brier Score Chart
-  const brierCtx = document.getElementById('brierChart').getContext('2d');
-  new Chart(brierCtx, {
+  // Comparison chart: Our run vs Paper
+  const compCtx = document.getElementById('comparisonChart').getContext('2d');
+  new Chart(compCtx, {
     type: 'bar',
     data: {
-      labels: ['Opus 4.6', 'Gemini 3 Flash', 'Qwen 3.5', 'Kimi K2.5', 'Sonnet 4.6', 'GPT-5.4'],
-      datasets: [{
-        data: [0.850, 0.837, 0.821, 0.782, 0.757, 0.701],
-        backgroundColor: ['#8b5cf6', '#ef4444', '#10b981', '#06b6d4', '#3b82f6', '#f59e0b'],
-        borderRadius: 6,
-        barPercentage: 0.6,
-      }]
+      labels: ['Qwen 3.5', 'Kimi K2.5', 'Opus 4.6', 'Gemini 3.1', 'Sonnet 4.6', 'GPT-5.4'],
+      datasets: [
+        {
+          label: 'Our Run',
+          data: [0.736, 0.684, 0.681, 0.675, 0.596, 0.578],
+          backgroundColor: ['#10b981', '#06b6d4', '#8b5cf6', '#ef4444', '#3b82f6', '#f59e0b'],
+          borderRadius: 6,
+          barPercentage: 0.45,
+          categoryPercentage: 0.7,
+        },
+        {
+          label: 'Paper',
+          data: [0.75, 0.73, null, 0.75, 0.73, 0.63],
+          backgroundColor: 'rgba(148, 163, 184, 0.25)',
+          borderColor: 'rgba(148, 163, 184, 0.5)',
+          borderWidth: 1,
+          borderRadius: 6,
+          barPercentage: 0.45,
+          categoryPercentage: 0.7,
+        }
+      ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: {
+          labels: { color: '#94a3b8', font: { size: 11 }, usePointStyle: true, pointStyle: 'rect' },
+          position: 'top',
+        },
         tooltip: {
           backgroundColor: '#1a2234',
           titleColor: '#e2e8f0',
@@ -788,8 +813,8 @@
       },
       scales: {
         y: {
-          beginAtZero: true,
-          max: 1,
+          min: 0.4,
+          max: 0.85,
           grid: { color: 'rgba(30,41,59,0.5)' },
           ticks: { color: '#94a3b8', font: { size: 11 } }
         },
@@ -809,15 +834,15 @@
       labels: ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
       datasets: [{
         label: 'Accuracy %',
-        data: [91.67, 100, 100, 91.67, 75, 83.33, 91.67, 100, 87.5, 91.67, 83.33],
+        data: [27.78, 80.0, 80.0, 69.44, 93.33, 100.0, 62.5, 80.56, 88.89, 50.0, 65.0],
         borderColor: '#3b82f6',
         backgroundColor: 'rgba(59,130,246,0.1)',
         fill: true,
         tension: 0.3,
         pointBackgroundColor: function(ctx) {
           const val = ctx.raw;
-          if (val >= 60) return '#10b981';
-          if (val >= 30) return '#f59e0b';
+          if (val >= 75) return '#10b981';
+          if (val >= 55) return '#f59e0b';
           return '#ef4444';
         },
         pointRadius: 5,
