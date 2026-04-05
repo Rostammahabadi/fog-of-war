@@ -150,12 +150,26 @@ class LLMRunner:
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
     
+    def _load_checkpoint(self, node_id: str) -> Optional[Dict[str, Any]]:
+        """Load existing node results as a checkpoint."""
+        checkpoint_file = OUTPUT_DIR / f"node_{node_id}_results.json"
+        if checkpoint_file.exists():
+            try:
+                with open(checkpoint_file, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception as e:
+                logger.warning(f"Failed to load checkpoint for {node_id}: {e}")
+        return None
+
     def run_node_analysis(self, node_id: str, intelligence_briefing: Dict[str, Any],
                          models: List[str], temperature: float = DEFAULT_TEMPERATURE,
-                         save_results: bool = True) -> Dict[str, Any]:
+                         save_results: bool = True,
+                         skip_exploratory: bool = False,
+                         no_cache: bool = False) -> Dict[str, Any]:
         """
         Run LLM analysis for a specific temporal node.
         Paper protocol: each question is posed independently (separate API call).
+        Supports checkpointing: loads prior results and only runs missing calls.
 
         Args:
             node_id: Temporal node identifier (T0, T1, etc.)
@@ -163,22 +177,46 @@ class LLMRunner:
             models: List of models to run
             temperature: Sampling temperature (paper: 0.3)
             save_results: Whether to save results to disk
+            skip_exploratory: Skip unscored exploratory questions to save cost
 
         Returns:
             Combined results from all models
         """
         # Get node-specific verifiable questions + exploratory questions
         node_questions = VERIFIABLE_QUESTIONS_BY_NODE.get(node_id, [])
-        all_questions = node_questions + EXPLORATORY_QUESTIONS
+        all_questions = node_questions + ([] if skip_exploratory else EXPLORATORY_QUESTIONS)
         num_verifiable = len(node_questions)
-        total_calls = len(models) * len(all_questions)
 
-        logger.info(f"Running node analysis for {node_id}: {len(models)} models × "
-                    f"{len(all_questions)} questions = {total_calls} calls "
-                    f"(max {MAX_CONCURRENT_REQUESTS} concurrent)")
+        # Load checkpoint to find already-completed work
+        checkpoint = None if no_cache else self._load_checkpoint(node_id)
+        cached_responses = {}  # (model, question_index) -> question_result
+        if checkpoint:
+            for model, model_data in checkpoint.get('model_results', {}).items():
+                for i, qr in enumerate(model_data.get('question_results', [])):
+                    if qr.get('success'):
+                        cached_responses[(model, i)] = qr
 
         # Build context text once (shared across all questions for this node)
         context_text = self.prompt_builder.build_context_text(intelligence_briefing)
+
+        # Determine which jobs still need to run
+        jobs = []
+        for model in models:
+            for i, question in enumerate(all_questions):
+                if (model, i) not in cached_responses:
+                    user_prompt = self.prompt_builder.build_paper_prompt(context_text, question)
+                    jobs.append((model, i, question, user_prompt))
+
+        skipped = len(models) * len(all_questions) - len(jobs)
+        if skipped > 0:
+            logger.info(f"Checkpoint for {node_id}: {skipped} calls cached, {len(jobs)} remaining")
+
+        if len(jobs) == 0:
+            logger.info(f"Node {node_id} fully cached, skipping inference")
+            return checkpoint
+
+        logger.info(f"Running node analysis for {node_id}: {len(jobs)} API calls "
+                    f"(max {MAX_CONCURRENT_REQUESTS} concurrent)")
 
         results = {
             'node_id': node_id,
@@ -195,14 +233,7 @@ class LLMRunner:
             }
         }
 
-        # Build all (model, question_index, prompt) jobs up front
-        jobs = []
-        for model in models:
-            for i, question in enumerate(all_questions):
-                user_prompt = self.prompt_builder.build_paper_prompt(context_text, question)
-                jobs.append((model, i, question, user_prompt))
-
-        # Run all jobs in parallel with a thread pool
+        # Run remaining jobs in parallel with a thread pool
         job_results = {}
         with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_REQUESTS) as pool:
             future_to_job = {
@@ -218,25 +249,39 @@ class LLMRunner:
                     result = {"success": False, "error": str(e), "model": model}
                 job_results[(model, idx)] = (question, result)
 
-        # Reassemble results by model, preserving question order
+        # Reassemble results by model, merging cached + fresh
         for model in models:
             model_question_results = []
             model_success = True
 
             for i in range(len(all_questions)):
-                question, result = job_results[(model, i)]
-                is_verifiable = i < num_verifiable
+                # Use cached result if available, otherwise use fresh result
+                if (model, i) in cached_responses:
+                    qr = cached_responses[(model, i)]
+                elif (model, i) in job_results:
+                    question, result = job_results[(model, i)]
+                    is_verifiable = i < num_verifiable
+                    qr = {
+                        'question': question,
+                        'question_type': 'verifiable' if is_verifiable else 'exploratory',
+                        'success': result.get('success', False),
+                        'response': result.get('response', ''),
+                        'usage': result.get('usage'),
+                        'timestamp': result.get('timestamp'),
+                    }
+                else:
+                    # Should not happen, but handle gracefully
+                    qr = {
+                        'question': all_questions[i],
+                        'question_type': 'verifiable' if i < num_verifiable else 'exploratory',
+                        'success': False,
+                        'response': '',
+                        'usage': None,
+                        'timestamp': None,
+                    }
 
-                model_question_results.append({
-                    'question': question,
-                    'question_type': 'verifiable' if is_verifiable else 'exploratory',
-                    'success': result.get('success', False),
-                    'response': result.get('response', ''),
-                    'usage': result.get('usage'),
-                    'timestamp': result.get('timestamp'),
-                })
-
-                if not result.get('success'):
+                model_question_results.append(qr)
+                if not qr.get('success'):
                     model_success = False
 
             if model_success:
@@ -255,7 +300,7 @@ class LLMRunner:
                 ),
             }
 
-        # Save results if requested
+        # Save results (acts as checkpoint for future runs)
         if save_results:
             self._save_node_results(node_id, results)
 
@@ -266,17 +311,20 @@ class LLMRunner:
     
     def run_temporal_sequence(self, nodes: List[str], data: Dict[str, Any],
                             models: List[str], temperature: float = DEFAULT_TEMPERATURE,
-                            save_individual: bool = True) -> Dict[str, Any]:
+                            save_individual: bool = True,
+                            skip_exploratory: bool = False,
+                            no_cache: bool = False) -> Dict[str, Any]:
         """
         Run LLM inference across temporal sequence.
-        
+
         Args:
             nodes: List of temporal node IDs to analyze
             data: Full dataset from DataFetcher
             models: List of models to run
             temperature: Sampling temperature
             save_individual: Whether to save individual node results
-            
+            skip_exploratory: Skip unscored exploratory questions to save cost
+
         Returns:
             Combined results across all nodes
         """
@@ -310,8 +358,8 @@ class LLMRunner:
             
             # Run analysis for this node
             node_results = self.run_node_analysis(
-                node_id, intelligence_briefing, models, 
-                temperature, save_individual
+                node_id, intelligence_briefing, models,
+                temperature, save_individual, skip_exploratory, no_cache
             )
             
             sequence_results['node_results'][node_id] = node_results
@@ -332,15 +380,18 @@ class LLMRunner:
     
     def run_full_pipeline(self, models: Optional[List[str]] = None,
                          temperature: float = DEFAULT_TEMPERATURE,
-                         fetch_fresh_data: bool = False) -> Dict[str, Any]:
+                         fetch_fresh_data: bool = False,
+                         skip_exploratory: bool = False,
+                         no_cache: bool = False) -> Dict[str, Any]:
         """
         Run complete end-to-end pipeline.
-        
+
         Args:
             models: List of models to use (defaults to all available)
             temperature: Sampling temperature
             fetch_fresh_data: Whether to fetch fresh data or use cache
-            
+            skip_exploratory: Skip unscored exploratory questions to save cost
+
         Returns:
             Complete pipeline results
         """
@@ -387,7 +438,8 @@ class LLMRunner:
             all_nodes = list(TEMPORAL_NODES.keys())
             
             sequence_results = self.run_temporal_sequence(
-                all_nodes, data, models, temperature
+                all_nodes, data, models, temperature,
+                skip_exploratory=skip_exploratory, no_cache=no_cache
             )
             
             pipeline_results['stages']['temporal_analysis'] = sequence_results

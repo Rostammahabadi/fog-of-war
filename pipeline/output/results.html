@@ -278,43 +278,48 @@
     height: 280px;
   }
 
-  /* Timeline */
+  .chart-full {
+    position: relative;
+    height: 320px;
+  }
+
+  /* Timeline - both line and circles positioned from .timeline left edge */
   .timeline {
     position: relative;
-    padding-left: 2rem;
+    padding-left: 36px;
   }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 7px;
+    left: 8px;
     top: 0;
     bottom: 0;
     width: 2px;
     background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--red));
-    border-radius: 1px;
   }
 
   .tl-item {
     position: relative;
-    padding: 0.75rem 0 1.5rem 1.25rem;
+    padding: 0.5rem 0 1.25rem 0;
   }
 
   .tl-item::before {
     content: '';
     position: absolute;
-    left: -1.65rem;
-    top: 1.1rem;
+    left: -33px;
+    top: 0.85rem;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    border: 2px solid var(--accent);
+    border: 2.5px solid var(--accent);
     background: var(--bg);
+    z-index: 1;
   }
 
-  .tl-item.high::before { border-color: var(--green); background: rgba(16, 185, 129, 0.2); }
-  .tl-item.mid::before { border-color: var(--amber); background: rgba(245, 158, 11, 0.2); }
-  .tl-item.low::before { border-color: var(--red); background: rgba(239, 68, 68, 0.2); }
+  .tl-item.high::before { border-color: var(--green); background: rgba(16, 185, 129, 0.25); }
+  .tl-item.mid::before { border-color: var(--amber); background: rgba(245, 158, 11, 0.25); }
+  .tl-item.low::before { border-color: var(--red); background: rgba(239, 68, 68, 0.25); }
 
   .tl-header {
     display: flex;
@@ -445,7 +450,7 @@
       <span><span class="dot"></span> Pipeline complete</span>
       <span>11 temporal nodes (T0 - T10)</span>
       <span>6 models evaluated</span>
-      <span>Feb 27 - Mar 6, 2026</span>
+      <span>Feb 27 - Mar 7, 2026</span>
     </div>
   </div>
 
@@ -453,13 +458,13 @@
   <div class="stats-grid">
     <div class="stat-card">
       <div class="label">Overall Accuracy</div>
-      <div class="value val-blue">72.5%</div>
+      <div class="value val-blue">75.8%</div>
       <div class="sub">Across all models & nodes</div>
     </div>
     <div class="stat-card">
       <div class="label">Best 1-MAE</div>
-      <div class="value val-green">0.736</div>
-      <div class="sub">Qwen 3.5-35B (higher is better)</div>
+      <div class="value val-green">0.776</div>
+      <div class="sub">Claude Opus 4.6 (higher is better)</div>
     </div>
     <div class="stat-card">
       <div class="label">Paper Avg 1-MAE</div>
@@ -489,82 +494,82 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><div class="model-name">Qwen 3.5-35B <span class="model-badge badge-gold">1st</span></div></td>
-            <td><strong style="color:var(--green)">0.736</strong></td>
-            <td>0.75</td>
-            <td>
-              <div class="bar-cell">
-                75.0%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:75%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.128</td>
-            <td><strong style="color:var(--amber)">1</strong></td>
-          </tr>
-          <tr>
-            <td><div class="model-name">Kimi K2.5 <span class="model-badge badge-silver">2nd</span></div></td>
-            <td><strong>0.684</strong></td>
-            <td>0.73</td>
-            <td>
-              <div class="bar-cell">
-                86.4%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:86.4%;background:var(--green)"></div></div>
-              </div>
-            </td>
-            <td>0.123</td>
-            <td><strong>2</strong></td>
-          </tr>
           <tr style="background:rgba(139,92,246,0.04)">
-            <td><div class="model-name">Claude Opus 4.6 <span class="model-badge badge-bronze">3rd</span> <span class="model-badge badge-ours">Ours</span></div></td>
-            <td><strong>0.681</strong></td>
+            <td><div class="model-name">Claude Opus 4.6 <span class="model-badge badge-gold">1st</span> <span class="model-badge badge-ours">Ours</span></div></td>
+            <td><strong style="color:var(--green)">0.776</strong></td>
             <td style="color:var(--text-muted)">&mdash;</td>
             <td>
               <div class="bar-cell">
-                73.2%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:73.2%;background:var(--green)"></div></div>
+                82.3%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:82.3%;background:var(--green)"></div></div>
               </div>
             </td>
-            <td>0.167</td>
-            <td><strong>3</strong></td>
+            <td>0.133</td>
+            <td><strong style="color:var(--amber)">1</strong></td>
           </tr>
           <tr>
-            <td><div class="model-name">Gemini 3.1 Flash <span class="model-badge" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Preview</span></div></td>
-            <td>0.675</td>
+            <td><div class="model-name">Qwen 3.5-35B <span class="model-badge badge-silver">2nd</span></div></td>
+            <td><strong>0.695</strong></td>
             <td>0.75</td>
             <td>
               <div class="bar-cell">
-                72.1%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:72.1%;background:var(--amber)"></div></div>
+                77.7%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:77.7%;background:var(--green)"></div></div>
               </div>
             </td>
-            <td>0.165</td>
-            <td><strong>4</strong></td>
+            <td>0.162</td>
+            <td><strong>2</strong></td>
           </tr>
           <tr>
-            <td><div class="model-name">Claude Sonnet 4.6</div></td>
-            <td>0.596</td>
+            <td><div class="model-name">Kimi K2.5 <span class="model-badge badge-bronze">3rd</span></div></td>
+            <td><strong>0.677</strong></td>
             <td>0.73</td>
             <td>
               <div class="bar-cell">
-                61.1%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:61.1%;background:var(--amber)"></div></div>
+                77.3%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:77.3%;background:var(--green)"></div></div>
               </div>
             </td>
-            <td>0.213</td>
+            <td>0.166</td>
+            <td><strong>3</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Claude Sonnet 4.6</div></td>
+            <td>0.663</td>
+            <td>0.73</td>
+            <td>
+              <div class="bar-cell">
+                75.2%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:75.2%;background:var(--green)"></div></div>
+              </div>
+            </td>
+            <td>0.184</td>
+            <td><strong>4</strong></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Gemini 3.1 Flash <span class="model-badge" style="background:rgba(6,182,212,0.12);color:var(--cyan)">Preview</span></div></td>
+            <td>0.634</td>
+            <td>0.75</td>
+            <td>
+              <div class="bar-cell">
+                68.0%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:68%;background:var(--amber)"></div></div>
+              </div>
+            </td>
+            <td>0.231</td>
             <td><strong>5</strong></td>
           </tr>
           <tr>
             <td><div class="model-name">GPT-5.4</div></td>
-            <td>0.578</td>
+            <td>0.629</td>
             <td>0.63</td>
             <td>
               <div class="bar-cell">
-                68.2%
-                <div class="mini-bar"><div class="mini-bar-fill" style="width:68.2%;background:var(--amber)"></div></div>
+                74.4%
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:74.4%;background:var(--amber)"></div></div>
               </div>
             </td>
-            <td>0.203</td>
+            <td>0.166</td>
             <td><strong>6</strong></td>
           </tr>
         </tbody>
@@ -572,7 +577,7 @@
     </div>
   </div>
 
-  <!-- Charts -->
+  <!-- Charts row 1 -->
   <div class="charts-grid">
     <div class="chart-card">
       <h3>1-MAE: Our Run vs Paper (higher is better)</h3>
@@ -588,31 +593,47 @@
     </div>
   </div>
 
+  <!-- Charts row 2 -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h3>1-MAE by Theme (Our Run vs Paper)</h3>
+      <div class="chart-container">
+        <canvas id="themeChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Per-Model 1-MAE by Theme</h3>
+      <div class="chart-container">
+        <canvas id="modelThemeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
   <!-- Thematic analysis -->
   <div class="section">
-    <div class="section-title"><span class="bar"></span>Thematic Analysis</div>
+    <div class="section-title"><span class="bar"></span>Thematic Analysis (1-MAE)</div>
     <div class="theme-grid">
       <div class="theme-card">
         <h4>Initial Outbreak</h4>
-        <div class="theme-acc val-amber">62.6%</div>
+        <div class="theme-acc val-green">0.743</div>
         <div class="theme-nodes">T0, T1, T2</div>
         <div class="theme-paper">Paper: 0.74</div>
       </div>
       <div class="theme-card">
         <h4>Threshold Crossings</h4>
-        <div class="theme-acc val-green">75.4%</div>
+        <div class="theme-acc val-amber">0.652</div>
         <div class="theme-nodes">T3, T6, T7, T8</div>
         <div class="theme-paper">Paper: 0.67</div>
       </div>
       <div class="theme-card">
         <h4>Economic Shockwaves</h4>
-        <div class="theme-acc val-green">96.7%</div>
+        <div class="theme-acc val-green">0.790</div>
         <div class="theme-nodes">T4, T5</div>
         <div class="theme-paper">Paper: 0.79</div>
       </div>
       <div class="theme-card">
         <h4>Political Signaling</h4>
-        <div class="theme-acc val-amber">57.5%</div>
+        <div class="theme-acc val-red">0.529</div>
         <div class="theme-nodes">T9, T10</div>
         <div class="theme-paper">Paper: 0.67</div>
       </div>
@@ -623,15 +644,15 @@
   <div class="section">
     <div class="section-title"><span class="bar"></span>Scenario Timeline</div>
     <div class="timeline">
-      <div class="tl-item low">
+      <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T0</span>
           <span class="tl-date">Feb 27, 2026</span>
         </div>
         <div class="tl-event">Operation Epic Fury</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>27.8%</strong></span>
-          <span>Brier: <strong>0.405</strong></span>
+          <span>Accuracy: <strong>66.7%</strong></span>
+          <span>Brier: <strong>0.190</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -641,8 +662,8 @@
         </div>
         <div class="tl-event">Israeli-US Coordinated Strikes on Iranian Facilities</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>80.0%</strong></span>
-          <span>Brier: <strong>0.132</strong></span>
+          <span>Accuracy: <strong>96.7%</strong></span>
+          <span>Brier: <strong>0.047</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -652,8 +673,8 @@
         </div>
         <div class="tl-event">Iranian Retaliatory Strikes</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>80.0%</strong></span>
-          <span>Brier: <strong>0.146</strong></span>
+          <span>Accuracy: <strong>83.3%</strong></span>
+          <span>Brier: <strong>0.104</strong></span>
         </div>
       </div>
       <div class="tl-item mid">
@@ -663,8 +684,8 @@
         </div>
         <div class="tl-event">Missiles Toward British Military Bases</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>69.4%</strong></span>
-          <span>Brier: <strong>0.157</strong></span>
+          <span>Accuracy: <strong>72.2%</strong></span>
+          <span>Brier: <strong>0.179</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -674,8 +695,8 @@
         </div>
         <div class="tl-event">Oil Refinery and Oil Tanker Attacked</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>93.3%</strong></span>
-          <span>Brier: <strong>0.073</strong></span>
+          <span>Accuracy: <strong>85.8%</strong></span>
+          <span>Brier: <strong>0.102</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -685,8 +706,8 @@
         </div>
         <div class="tl-event">Qatar Halts Energy Production</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>100.0%</strong></span>
-          <span>Brier: <strong>0.045</strong></span>
+          <span>Accuracy: <strong>95.8%</strong></span>
+          <span>Brier: <strong>0.041</strong></span>
         </div>
       </div>
       <div class="tl-item mid">
@@ -697,7 +718,7 @@
         <div class="tl-event">Natanz Nuclear Facility Damaged</div>
         <div class="tl-metrics">
           <span>Accuracy: <strong>62.5%</strong></span>
-          <span>Brier: <strong>0.202</strong></span>
+          <span>Brier: <strong>0.263</strong></span>
         </div>
       </div>
       <div class="tl-item high">
@@ -705,24 +726,24 @@
           <span class="tl-node">T7</span>
           <span class="tl-date">Mar 3, 2026</span>
         </div>
-        <div class="tl-event">US Begins Evacuation of Citizens</div>
+        <div class="tl-event">US Suggests Citizen Evacuation</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>80.6%</strong></span>
-          <span>Brier: <strong>0.121</strong></span>
+          <span>Accuracy: <strong>88.9%</strong></span>
+          <span>Brier: <strong>0.105</strong></span>
         </div>
       </div>
-      <div class="tl-item high">
+      <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T8</span>
           <span class="tl-date">Mar 3, 2026 12:00</span>
         </div>
         <div class="tl-event">Nine Countries Involved; Israeli Ground Invasion</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>88.9%</strong></span>
-          <span>Brier: <strong>0.071</strong></span>
+          <span>Accuracy: <strong>69.4%</strong></span>
+          <span>Brier: <strong>0.269</strong></span>
         </div>
       </div>
-      <div class="tl-item mid">
+      <div class="tl-item low">
         <div class="tl-header">
           <span class="tl-node">T9</span>
           <span class="tl-date">Mar 3, 2026 18:00</span>
@@ -730,18 +751,18 @@
         <div class="tl-event">Mojtaba Khamenei Becomes Supreme Leader</div>
         <div class="tl-metrics">
           <span>Accuracy: <strong>50.0%</strong></span>
-          <span>Brier: <strong>0.281</strong></span>
+          <span>Brier: <strong>0.295</strong></span>
         </div>
       </div>
       <div class="tl-item mid">
         <div class="tl-header">
           <span class="tl-node">T10</span>
-          <span class="tl-date">Mar 6, 2026</span>
+          <span class="tl-date">Mar 7, 2026</span>
         </div>
         <div class="tl-event">Iranian Apology to Neighboring Countries</div>
         <div class="tl-metrics">
-          <span>Accuracy: <strong>65.0%</strong></span>
-          <span>Brier: <strong>0.212</strong></span>
+          <span>Accuracy: <strong>62.5%</strong></span>
+          <span>Brier: <strong>0.318</strong></span>
         </div>
       </div>
     </div>
@@ -750,17 +771,17 @@
   <!-- Methodology note -->
   <div class="note">
     <strong>Methodology:</strong> Based on the paper <a href="https://arxiv.org/abs/2603.16642" style="color:var(--accent)">"When AI Navigates the Fog of War"</a> (Li et al., 2026).
-    Each model receives temporally-gated intelligence briefings and independently answers 42 verifiable binary questions across 11 nodes, matching the paper's single-question protocol (no system prompt, temperature 0.3, max 2048 tokens).
+    Each model receives temporally-gated intelligence briefings (2,500 news articles from 11 outlets, capped at ~480K characters per node) and independently answers 42 verifiable binary questions across 11 nodes, matching the paper's single-question protocol (no system prompt, temperature 0.3, max 2048 tokens).
     <strong>1-MAE</strong> (Calibration Consistency) is the paper's primary metric: 1 minus mean absolute error between predicted probability and binary outcome (higher = better).
     <strong>Brier Score</strong> measures calibration (lower = better). <strong>Accuracy</strong> is binary prediction correctness (p > 0.5).
     <br><br>
-    <strong>Key difference from paper:</strong> The paper used manual human probability extraction by two researchers. This pipeline uses automated LLM-based extraction (Claude Haiku 4.5), which adds extraction noise and likely explains the ~0.05 lower scores across the board. Rank ordering and thematic patterns are consistent with the paper's findings.
-    Claude Opus 4.6 is our addition (not evaluated in the original paper).
+    <strong>Key difference from paper:</strong> The paper used manual human probability extraction by two researchers. This pipeline uses automated LLM-based extraction (Claude Haiku 4.5), which adds extraction noise and likely explains the ~0.05 lower scores for most models. Thematic patterns are highly consistent with the paper's findings: Economic Shockwaves is the strongest theme (our 0.790 vs paper 0.79), Initial Outbreak closely matches (0.743 vs 0.74), while Political Signaling shows the largest divergence (0.529 vs 0.67).
+    Claude Opus 4.6 is our addition (not evaluated in the original paper) and achieves the highest overall 1-MAE of 0.776.
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    <p>Fog of War Evaluation Pipeline &middot; Run 2026-04-05 &middot; 42 questions &middot; 6 models &middot; 11 nodes &middot; <a href="https://arxiv.org/abs/2603.16642">Paper</a> &middot; <a href="https://github.com/RostamMahabadi/fog-of-war">GitHub</a></p>
+    <p>Fog of War Evaluation Pipeline &middot; Run 2026-04-05 &middot; 42 questions &middot; 6 models &middot; 11 nodes &middot; 2,500 articles &middot; <a href="https://arxiv.org/abs/2603.16642">Paper</a></p>
   </div>
 
 </div>
@@ -771,19 +792,19 @@
   new Chart(compCtx, {
     type: 'bar',
     data: {
-      labels: ['Qwen 3.5', 'Kimi K2.5', 'Opus 4.6', 'Gemini 3.1', 'Sonnet 4.6', 'GPT-5.4'],
+      labels: ['Opus 4.6', 'Qwen 3.5', 'Kimi K2.5', 'Sonnet 4.6', 'Gemini 3.1', 'GPT-5.4'],
       datasets: [
         {
           label: 'Our Run',
-          data: [0.736, 0.684, 0.681, 0.675, 0.596, 0.578],
-          backgroundColor: ['#10b981', '#06b6d4', '#8b5cf6', '#ef4444', '#3b82f6', '#f59e0b'],
+          data: [0.776, 0.695, 0.677, 0.663, 0.634, 0.629],
+          backgroundColor: ['#8b5cf6', '#10b981', '#06b6d4', '#3b82f6', '#ef4444', '#f59e0b'],
           borderRadius: 6,
           barPercentage: 0.45,
           categoryPercentage: 0.7,
         },
         {
           label: 'Paper',
-          data: [0.75, 0.73, null, 0.75, 0.73, 0.63],
+          data: [null, 0.75, 0.73, 0.73, 0.75, 0.63],
           backgroundColor: 'rgba(148, 163, 184, 0.25)',
           borderColor: 'rgba(148, 163, 184, 0.5)',
           borderWidth: 1,
@@ -834,7 +855,7 @@
       labels: ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
       datasets: [{
         label: 'Accuracy %',
-        data: [27.78, 80.0, 80.0, 69.44, 93.33, 100.0, 62.5, 80.56, 88.89, 50.0, 65.0],
+        data: [66.67, 96.67, 83.33, 72.22, 85.83, 95.83, 62.5, 88.89, 69.44, 50.0, 62.5],
         borderColor: '#3b82f6',
         backgroundColor: 'rgba(59,130,246,0.1)',
         fill: true,
@@ -882,6 +903,101 @@
         x: {
           grid: { display: false },
           ticks: { color: '#94a3b8', font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // Theme comparison chart: Our run vs Paper
+  const themeCtx = document.getElementById('themeChart').getContext('2d');
+  new Chart(themeCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Initial Outbreak', 'Threshold Crossings', 'Economic Shockwaves', 'Political Signaling'],
+      datasets: [
+        {
+          label: 'Our Run',
+          data: [0.743, 0.652, 0.790, 0.529],
+          backgroundColor: ['rgba(59,130,246,0.7)', 'rgba(59,130,246,0.7)', 'rgba(59,130,246,0.7)', 'rgba(59,130,246,0.7)'],
+          borderRadius: 6,
+          barPercentage: 0.45,
+          categoryPercentage: 0.7,
+        },
+        {
+          label: 'Paper',
+          data: [0.74, 0.67, 0.79, 0.67],
+          backgroundColor: 'rgba(148, 163, 184, 0.25)',
+          borderColor: 'rgba(148, 163, 184, 0.5)',
+          borderWidth: 1,
+          borderRadius: 6,
+          barPercentage: 0.45,
+          categoryPercentage: 0.7,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', font: { size: 11 }, usePointStyle: true, pointStyle: 'rect' },
+          position: 'top',
+        },
+        tooltip: {
+          backgroundColor: '#1a2234', titleColor: '#e2e8f0', bodyColor: '#94a3b8',
+          borderColor: '#1e293b', borderWidth: 1, cornerRadius: 8, padding: 12,
+        }
+      },
+      scales: {
+        y: {
+          min: 0.3, max: 0.9,
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          ticks: { color: '#94a3b8', font: { size: 11 } }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: '#94a3b8', font: { size: 10 } }
+        }
+      }
+    }
+  });
+
+  // Per-model theme radar-style grouped bar
+  const mtCtx = document.getElementById('modelThemeChart').getContext('2d');
+  new Chart(mtCtx, {
+    type: 'radar',
+    data: {
+      labels: ['Initial Outbreak', 'Threshold Crossings', 'Economic Shockwaves', 'Political Signaling'],
+      datasets: [
+        { label: 'Opus 4.6', data: [0.901, 0.690, 0.876, 0.660], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.08)', pointBackgroundColor: '#8b5cf6', borderWidth: 2 },
+        { label: 'Qwen 3.5', data: [0.709, 0.749, 0.787, 0.475], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.08)', pointBackgroundColor: '#10b981', borderWidth: 2 },
+        { label: 'Kimi K2.5', data: [0.736, 0.612, 0.854, 0.542], borderColor: '#06b6d4', backgroundColor: 'rgba(6,182,212,0.08)', pointBackgroundColor: '#06b6d4', borderWidth: 2 },
+        { label: 'Sonnet 4.6', data: [0.779, 0.576, 0.730, 0.598], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.08)', pointBackgroundColor: '#3b82f6', borderWidth: 2 },
+        { label: 'GPT-5.4', data: [0.606, 0.642, 0.730, 0.539], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', pointBackgroundColor: '#f59e0b', borderWidth: 2 },
+        { label: 'Gemini 3.1', data: [0.724, 0.640, 0.762, 0.358], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.08)', pointBackgroundColor: '#ef4444', borderWidth: 2 },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', font: { size: 10 }, usePointStyle: true, pointStyle: 'circle', padding: 12 },
+          position: 'bottom',
+        },
+        tooltip: {
+          backgroundColor: '#1a2234', titleColor: '#e2e8f0', bodyColor: '#94a3b8',
+          borderColor: '#1e293b', borderWidth: 1, cornerRadius: 8, padding: 12,
+        }
+      },
+      scales: {
+        r: {
+          min: 0.2,
+          max: 1.0,
+          ticks: { color: '#94a3b8', font: { size: 9 }, backdropColor: 'transparent', stepSize: 0.2 },
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          angleLines: { color: 'rgba(30,41,59,0.5)' },
+          pointLabels: { color: '#94a3b8', font: { size: 10 } }
         }
       }
     }

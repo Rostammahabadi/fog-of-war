@@ -8,14 +8,14 @@ How well can frontier AI models predict escalating events when they can only see
 
 | Model | 1-MAE | Paper 1-MAE | Accuracy | Brier Score |
 |-------|-------|-------------|----------|-------------|
-| Qwen 3.5-35B | **0.736** | 0.75 | 75.0% | 0.128 |
-| Kimi K2.5 | 0.684 | 0.73 | 86.4% | 0.123 |
-| Claude Opus 4.6 | 0.681 | — | 73.2% | 0.167 |
-| Gemini 3.1 Flash | 0.675 | 0.75 | 72.1% | 0.165 |
-| Claude Sonnet 4.6 | 0.596 | 0.73 | 61.1% | 0.213 |
-| GPT-5.4 | 0.578 | 0.63 | 68.2% | 0.203 |
+| Claude Opus 4.6 | **0.776** | — | 82.3% | 0.133 |
+| Qwen 3.5-35B | 0.695 | 0.75 | 77.7% | 0.162 |
+| Kimi K2.5 | 0.677 | 0.73 | 77.3% | 0.166 |
+| Claude Sonnet 4.6 | 0.663 | 0.73 | 75.2% | 0.184 |
+| Gemini 3.1 Flash | 0.634 | 0.75 | 68.0% | 0.231 |
+| GPT-5.4 | 0.629 | 0.63 | 74.4% | 0.166 |
 
-Scores are ~0.05 lower than the paper due to automated probability extraction (LLM) vs. the paper's manual human extraction. Rank ordering and thematic patterns are consistent. Claude Opus 4.6 is our addition (not in the original paper).
+Scores are ~0.05 lower than the paper for most models due to automated probability extraction (Claude Haiku 4.5) vs. the paper's manual human extraction. Thematic patterns are highly consistent: Economic Shockwaves is the strongest theme (0.790 vs paper's 0.79), Initial Outbreak closely matches (0.743 vs 0.74). Claude Opus 4.6 is our addition (not in the original paper) and achieves the highest 1-MAE.
 
 Open `pipeline/output/results.html` in a browser for the full interactive dashboard.
 

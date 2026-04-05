@@ -360,21 +360,21 @@ class DataFetcher:
             conn = psycopg2.connect("dbname=fog_of_war")
             cur = conn.cursor()
             cur.execute("""
-                SELECT title, url, source_name, published_at,
-                       LEFT(full_text, 2000) as body
+                SELECT DISTINCT ON (url) title, url, source_name, published_at, full_text
                 FROM articles
                 WHERE scrape_status = 'success'
                   AND published_at >= '2026-02-01' AND published_at < '2026-03-08'
-                ORDER BY published_at DESC
+                ORDER BY url, published_at DESC
             """)
             articles = []
             for row in cur.fetchall():
+                body = (row[4] or '')[:2000]
                 articles.append({
                     'title': row[0],
                     'url': row[1],
                     'source': row[2],
                     'published_at': row[3].isoformat() if row[3] else None,
-                    'body': row[4],
+                    'body': body,
                 })
             cur.close()
             conn.close()

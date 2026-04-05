@@ -183,7 +183,9 @@ def cmd_run(args):
         builder = ContextBuilder(data)
         briefing = builder.build_context(target_date)
         
-        results = runner.run_node_analysis(node_id, briefing, models, args.temperature)
+        results = runner.run_node_analysis(node_id, briefing, models, args.temperature,
+                                                skip_exploratory=getattr(args, 'skip_exploratory', False),
+                                                no_cache=getattr(args, 'no_cache', False))
         
         print(f"\nInference completed for node {node_id}")
         print(f"Models: {models}")
@@ -191,7 +193,9 @@ def cmd_run(args):
         
     else:
         # Temporal sequence analysis
-        results = runner.run_temporal_sequence(nodes, data, models, args.temperature)
+        results = runner.run_temporal_sequence(nodes, data, models, args.temperature,
+                                                    skip_exploratory=getattr(args, 'skip_exploratory', False),
+                                                    no_cache=getattr(args, 'no_cache', False))
         
         print(f"\nTemporal sequence completed")
         print(f"Nodes: {len(nodes)}")
@@ -286,7 +290,9 @@ def cmd_full(args):
     results = runner.run_full_pipeline(
         models=models,
         temperature=args.temperature,
-        fetch_fresh_data=args.fetch_fresh
+        fetch_fresh_data=args.fetch_fresh,
+        skip_exploratory=getattr(args, 'skip_exploratory', False),
+        no_cache=getattr(args, 'no_cache', False)
     )
     
     if results.get('error'):
@@ -435,10 +441,14 @@ Temporal Nodes:
                            help='Model to use (can be specified multiple times)')
     run_parser.add_argument('--nodes', default='all',
                            help='Comma-separated node IDs or "all"')
-    run_parser.add_argument('--temperature', type=float, default=0.7,
-                           help='Sampling temperature')
+    run_parser.add_argument('--temperature', type=float, default=0.3,
+                           help='Sampling temperature (paper: 0.3)')
     run_parser.add_argument('--data-cache', default='pipeline_data_cache.json',
                            help='Data cache file to use')
+    run_parser.add_argument('--skip-exploratory', action='store_true',
+                            help='Skip unscored exploratory questions (saves ~57%% of API cost)')
+    run_parser.add_argument('--no-cache', action='store_true',
+                            help='Ignore cached node results and rerun all inference')
     run_parser.set_defaults(func=cmd_run)
     
     # Evaluate command
@@ -453,12 +463,16 @@ Temporal Nodes:
     full_parser = subparsers.add_parser('full', help='Run complete pipeline')
     full_parser.add_argument('--model', action='append',
                             help='Model to use (can be specified multiple times)')
-    full_parser.add_argument('--temperature', type=float, default=0.7,
-                            help='Sampling temperature')
+    full_parser.add_argument('--temperature', type=float, default=0.3,
+                            help='Sampling temperature (paper: 0.3)')
     full_parser.add_argument('--fetch-fresh', action='store_true',
                             help='Fetch fresh data instead of using cache')
     full_parser.add_argument('--evaluate', action='store_true',
                             help='Run evaluation after inference')
+    full_parser.add_argument('--skip-exploratory', action='store_true',
+                            help='Skip unscored exploratory questions (saves ~57%% of API cost)')
+    full_parser.add_argument('--no-cache', action='store_true',
+                            help='Ignore cached node results and rerun all inference')
     full_parser.set_defaults(func=cmd_full)
     
     # Parse arguments

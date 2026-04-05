@@ -73,9 +73,12 @@ class Evaluator:
             'ground_truth_summary': self._summarize_ground_truth(ground_truth)
         }
         
-        # Evaluate each model's predictions
+        # Evaluate each model's predictions (including partial results)
         for model, model_result in predictions.get('model_results', {}).items():
-            if model_result.get('success'):
+            has_any_response = any(
+                qr.get('success') for qr in model_result.get('question_results', [])
+            ) if 'question_results' in model_result else model_result.get('success')
+            if has_any_response:
                 model_eval = self._evaluate_single_model(model_result, ground_truth, node_id)
                 evaluation['model_evaluations'][model] = model_eval
         
