@@ -6,6 +6,7 @@ Compares LLM predictions against ground truth events and generates evaluation me
 import json
 import logging
 import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple, Union
@@ -73,14 +74,23 @@ class Evaluator:
             'ground_truth_summary': self._summarize_ground_truth(ground_truth)
         }
         
-        # Evaluate each model's predictions (including partial results)
+        # Evaluate each model's predictions in parallel (including partial results)
+        eligible = {}
         for model, model_result in predictions.get('model_results', {}).items():
             has_any_response = any(
                 qr.get('success') for qr in model_result.get('question_results', [])
             ) if 'question_results' in model_result else model_result.get('success')
             if has_any_response:
-                model_eval = self._evaluate_single_model(model_result, ground_truth, node_id)
-                evaluation['model_evaluations'][model] = model_eval
+                eligible[model] = model_result
+
+        with ThreadPoolExecutor(max_workers=len(eligible) or 1) as pool:
+            futures = {
+                pool.submit(self._evaluate_single_model, mr, ground_truth, node_id): model
+                for model, mr in eligible.items()
+            }
+            for future in as_completed(futures):
+                model = futures[future]
+                evaluation['model_evaluations'][model] = future.result()
         
         # Calculate aggregate metrics across models
         evaluation['aggregate_metrics'] = self._calculate_aggregate_metrics(
@@ -116,22 +126,32 @@ class Evaluator:
             response_text, primary_question, model_name, node_id
         )
 
-        # Build per-question predictions using LLM extraction
+        # Build per-question predictions using LLM extraction (parallel)
         # Use per-question response if available (paper protocol), else fall back to full response
-        question_results = []
-        for q in node_questions:
+        def _extract_one(q):
             q_response = per_question_responses.get(q["question"], response_text)
             q_extraction = self.extractor.extract_probability(
                 q_response, q["question"], model_name, node_id + f"_q{q['id']}"
             )
-            question_results.append({
+            return {
                 'question_id': q['id'],
                 'question': q['question'],
                 'predicted_probability': q_extraction['probability'],
                 'ground_truth': 1.0 if q['ground_truth'] else 0.0,
                 'raw_quote': q_extraction.get('raw_quote'),
                 'source': q_extraction.get('source'),
-            })
+            }
+
+        question_results = []
+        with ThreadPoolExecutor(max_workers=10) as pool:
+            futures = {pool.submit(_extract_one, q): q['id'] for q in node_questions}
+            results_by_id = {}
+            for future in as_completed(futures):
+                qr = future.result()
+                results_by_id[qr['question_id']] = qr
+            # Preserve original question order
+            for q in node_questions:
+                question_results.append(results_by_id[q['id']])
 
         # Calculate 1-MAE and Brier score from question results
         valid_results = [r for r in question_results if r['predicted_probability'] is not None]

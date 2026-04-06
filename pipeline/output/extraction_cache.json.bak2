@@ -1,0 +1,1497 @@
+{
+  "9b6d9284cb9d4f18": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "aeb0d797fd30db3d": {
+    "probability": 0.88,
+    "raw_quote": "Probability of US conducting direct military strikes on Iranian territory: ~88%",
+    "source": "llm"
+  },
+  "6e5c2026e5b58bd9": {
+    "probability": 0.25,
+    "raw_quote": "Scenario B: Sanctions/Pressure Extended (Status Quo Plus)... Probability: **~25%**",
+    "source": "llm"
+  },
+  "576b753ad0cf672f": {
+    "probability": 0.94,
+    "raw_quote": "Probability that Operation Epic Fury signals/confirms the beginning of a broader military conflict: 94%",
+    "source": "llm"
+  },
+  "6f46991b59c25b93": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "4e6a1494fae08ee4": {
+    "probability": 0.65,
+    "raw_quote": "Probability of direct U.S. military strikes on Iranian territory: 65%",
+    "source": "llm"
+  },
+  "bade77b1e20d06b3": {
+    "probability": 0.65,
+    "raw_quote": "High Probability (60-70%) that the U.S. will continue to exhaust diplomatic and economic channels",
+    "source": "llm"
+  },
+  "1e5dba91134411a6": {
+    "probability": 0.75,
+    "raw_quote": "Probability of a broader military conflict: 75%",
+    "source": "llm"
+  },
+  "216af3f72dda98b5": {
+    "probability": 0.15,
+    "raw_quote": "Probability that the conflict escalates into a global war: ~15%",
+    "source": "llm"
+  },
+  "8b2fbfc3e87fe4fc": {
+    "probability": 0.4,
+    "raw_quote": "Probability of direct U.S. military strikes on Iranian territory in the near term: 40%",
+    "source": "llm"
+  },
+  "fd35933536c3f1bd": {
+    "probability": 0.65,
+    "raw_quote": "U.S. prioritizes sanctions/diplomatic pressure over military action in the near term: 65%",
+    "source": "llm"
+  },
+  "8fa0e6b902e81905": {
+    "probability": 0.68,
+    "raw_quote": "Probability that it signals the beginning of a broader military conflict: 68%",
+    "source": "llm"
+  },
+  "3a052cdc387c21c7": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "b504813940b905e2": {
+    "probability": 0.8,
+    "raw_quote": "Probability: 80%",
+    "source": "llm"
+  },
+  "ba3e60b436dd0a16": {
+    "probability": 0.85,
+    "raw_quote": "High (85%)",
+    "source": "llm"
+  },
+  "9a2aea65916b7a23": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "38bfc2edc8d149c7": {
+    "probability": 0.7,
+    "raw_quote": "the United States appears **likely to conduct direct military strikes on Iranian territory**",
+    "source": "llm"
+  },
+  "f3eac55b1e08433f": {
+    "probability": 0.6,
+    "raw_quote": "Probability: 60%",
+    "source": "llm"
+  },
+  "8f3cb6092813550e": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "ee30cacf85bd2a18": {
+    "probability": 0.95,
+    "raw_quote": "Probability of US direct military strikes on Iranian territory: 0.95",
+    "source": "llm"
+  },
+  "9d1f6629ea3a34aa": {
+    "probability": 0.1,
+    "raw_quote": "Probability: 0.1",
+    "source": "llm"
+  },
+  "f9448b996f54595c": {
+    "probability": 0.97,
+    "raw_quote": "Probability that Operation Epic Fury signals the beginning of a broader military conflict: 0.97",
+    "source": "llm"
+  },
+  "131376305f41ebf1": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "ea7e7157ca7c430d": {
+    "probability": 0.78,
+    "raw_quote": "Probability that Israeli-U.S. strikes escalate into a broader military campaign (beyond the initial strike package, involving sustained combat, proxy activation, or multi-theater conflict): ~78%",
+    "source": "llm"
+  },
+  "264092b7fcd7b738": {
+    "probability": 0.94,
+    "raw_quote": "Probability that Iran retaliates militarily (in some form): ~94%",
+    "source": "llm"
+  },
+  "96e3a8c49efe3f55": {
+    "probability": 0.15,
+    "raw_quote": "approximately 12-18%",
+    "source": "llm"
+  },
+  "00dfa4291ea06631": {
+    "probability": 0.78,
+    "raw_quote": "Overall probability that Gulf states become direct targets of Iranian retaliation in some meaningful form: 75-80%",
+    "source": "llm"
+  },
+  "5dc0497630cc4ce6": {
+    "probability": 0.94,
+    "raw_quote": "Probability of Widespread Regional Airspace Closures: 94%",
+    "source": "llm"
+  },
+  "ffc5c540a287fc97": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "1187bd91c2f99d20": {
+    "probability": 0.65,
+    "raw_quote": "Probability of escalation into a broader military campaign: 65%",
+    "source": "llm"
+  },
+  "68dbfd502565902b": {
+    "probability": 0.9,
+    "raw_quote": "Probability of Iranian military retaliation: 90%",
+    "source": "llm"
+  },
+  "5df9f077a6307288": {
+    "probability": 0.15,
+    "raw_quote": "Indiscriminate bombing of Israeli/U.S. territory: 15%",
+    "source": "llm"
+  },
+  "c08f50cb8a03bf9a": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "88359495ed269e4f": {
+    "probability": 0.9,
+    "raw_quote": "Probability of widespread Middle East airspace closures: 90%",
+    "source": "llm"
+  },
+  "ef0081b46a298bda": {
+    "probability": 0.35,
+    "raw_quote": "Escenario B: ataque limitado de EEUU/Israel contra Ir\u00e1n... **Probabilidad:** **35%**",
+    "source": "llm"
+  },
+  "c59e724fc1f6daec": {
+    "probability": 0.7,
+    "raw_quote": "Probabilidad estimada de escalada a una campa\u00f1a militar m\u00e1s amplia: 70%",
+    "source": "llm"
+  },
+  "3793bcf8b1b55c57": {
+    "probability": 0.75,
+    "raw_quote": "Probabilidad de represalia militar: 75%",
+    "source": "llm"
+  },
+  "d42f15868901f146": {
+    "probability": 0.25,
+    "raw_quote": "75% de que priorice bases militares/objetivos militares sobre bombardeo indiscriminado de territorio",
+    "source": "llm"
+  },
+  "8313b4359df3e78c": {
+    "probability": 0.45,
+    "raw_quote": "Que al menos un Estado del Golfo se convierta en objetivo directo de represalia iran\u00ed en una escalada mayor: 45%",
+    "source": "llm"
+  },
+  "4fb1274e394613ce": {
+    "probability": 0.7,
+    "raw_quote": "Probabilidad estimada de cierres regionales significativos del espacio a\u00e9reo por seguridad: 70%",
+    "source": "llm"
+  },
+  "eefc9aa268eef6ed": {
+    "probability": 0.85,
+    "raw_quote": "Probability of Military Escalation/Strike (US-Iran): **85%**",
+    "source": "llm"
+  },
+  "c8e0d02512acd391": {
+    "probability": 0.85,
+    "raw_quote": "Probability of Escalation into a Broader Military Campaign: 85%",
+    "source": "llm"
+  },
+  "660e71449d4ac3cc": {
+    "probability": 0.85,
+    "raw_quote": "**Probability:** 85%",
+    "source": "llm"
+  },
+  "5003d8305535a325": {
+    "probability": 0.9,
+    "raw_quote": "**Probability:** 90%",
+    "source": "llm"
+  },
+  "e0b4f8961397d26d": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f99c3fcff36795c9": {
+    "probability": 0.75,
+    "raw_quote": "the current situation exhibits the classic hallmarks of a conflict poised for rapid escalation from limited initial strikes to a broader military campaign",
+    "source": "llm"
+  },
+  "44de33a8fdb84568": {
+    "probability": 0.85,
+    "raw_quote": "Iran is highly likely to retaliate militarily",
+    "source": "llm"
+  },
+  "8f2d5ee5d6267ce6": {
+    "probability": 0.3,
+    "raw_quote": "it is significantly more likely that Iran would target U.S. military bases rather than indiscriminately bomb Israeli-U.S. territory",
+    "source": "llm"
+  },
+  "484312137ef6e9ae": {
+    "probability": 0.85,
+    "raw_quote": "Iran's retaliation doctrine would almost certainly include targets in the Gulf",
+    "source": "llm"
+  },
+  "d3031e46c96141fe": {
+    "probability": 0.85,
+    "raw_quote": "regional airspace in the Middle East is highly likely to face widespread closures",
+    "source": "llm"
+  },
+  "797fe135e475a229": {
+    "probability": 0.97,
+    "raw_quote": "Israel launched a \"pre-emptive attack\" on Iran, with US strikes also underway",
+    "source": "llm"
+  },
+  "2c54bd32c8d80968": {
+    "probability": 0.92,
+    "raw_quote": "Probability that the Israeli-U.S. strikes escalate into a broader military campaign: 0.92",
+    "source": "llm"
+  },
+  "e86615f320c6b663": {
+    "probability": 0.95,
+    "raw_quote": "Probability that Iran retaliates militarily: 0.95",
+    "source": "llm"
+  },
+  "db7c92456b6e186a": {
+    "probability": 0.08,
+    "raw_quote": "Probability that Iran would indiscriminately bomb Israeli-U.S. territory rather than target U.S. military bases: 0.08 (8%)",
+    "source": "llm"
+  },
+  "f46f80777d264b38": {
+    "probability": 0.88,
+    "raw_quote": "Probability that Gulf states become direct targets of Iranian retaliation: 0.88",
+    "source": "llm"
+  },
+  "66bcc5e136b6b6e0": {
+    "probability": 0.95,
+    "raw_quote": "Probability: 0.95",
+    "source": "llm"
+  },
+  "fb32ff8a556e75ce": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f7acfd17e9384939": {
+    "probability": 0.08,
+    "raw_quote": "Probability that Iranian strikes remain merely symbolic without sustained military operations: 8%",
+    "source": "llm"
+  },
+  "a305985b1e615cdb": {
+    "probability": 0.75,
+    "raw_quote": "Probability of some form of Iranian action to disrupt/threaten Strait of Hormuz shipping (including harassment, mining, or attacks on specific vessels): ~75%",
+    "source": "llm"
+  },
+  "d45e047fe30b6dc0": {
+    "probability": 0.78,
+    "raw_quote": "Overall probability that at least one additional country becomes directly involved in offensive military operations within 2 weeks: ~78%",
+    "source": "llm"
+  },
+  "d1fbafdc1aef634a": {
+    "probability": 0.99,
+    "raw_quote": "Overall probability that large-scale Middle Eastern airspace closure follows/continues from these strikes: ~99%",
+    "source": "llm"
+  },
+  "3359f89d2fb780c2": {
+    "probability": 0.18,
+    "raw_quote": "Overall probability of meaningful internal rebellion (sufficient to threaten regime survival): approximately 15-20%",
+    "source": "llm"
+  },
+  "bff27318a1662bc5": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "1c27382ea7c7d254": {
+    "probability": 0.05,
+    "raw_quote": "Probability that Iranian strikes remain symbolic: < 5%",
+    "source": "llm"
+  },
+  "a43c8eba68babd3a": {
+    "probability": 0.85,
+    "raw_quote": "Iran is highly likely to attempt to disrupt shipping. ... **Probability: 85%**",
+    "source": "llm"
+  },
+  "2327cd2eedec0e05": {
+    "probability": 0.9,
+    "raw_quote": "The probability of further direct involvement from other regional states: **90%**",
+    "source": "llm"
+  },
+  "e21dccfdd759c9fe": {
+    "probability": 0.95,
+    "raw_quote": "Probability: 95% (Large-scale, prolonged airspace disruption and closure are highly likely to persist while the joint U.S.-Israeli campaign continues)",
+    "source": "llm"
+  },
+  "09de454edfd699c0": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "699881eedcf289c5": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "26ab1c3eb93532cc": {
+    "probability": 0.3,
+    "raw_quote": "Probability that Iranian strikes remain only symbolic and do not develop into sustained military operations: ~30%",
+    "source": "llm"
+  },
+  "79fdc6c608fe3b32": {
+    "probability": 0.7,
+    "raw_quote": "Attempt to disrupt shipping in some form: 70%",
+    "source": "llm"
+  },
+  "26588ab151986bdf": {
+    "probability": 0.75,
+    "raw_quote": "Probability that additional regional countries become directly involved in some meaningful military/security capacity: 75%",
+    "source": "llm"
+  },
+  "d3cf93ffcba03463": {
+    "probability": 0.8,
+    "raw_quote": "Probability of large-scale Middle Eastern airspace closure following these strikes: 80%",
+    "source": "llm"
+  },
+  "3b37438301ff6766": {
+    "probability": 0.4,
+    "raw_quote": "Overall probability that this conflict triggers internal rebellion within Iran: 40%",
+    "source": "llm"
+  },
+  "56fd57b246e9c327": {
+    "probability": 0.9,
+    "raw_quote": "Continued Missile/Drone Attacks | 90% | Explicitly declared policy",
+    "source": "llm"
+  },
+  "ae6f99caa3c797f1": {
+    "probability": 0.15,
+    "raw_quote": "Probability that Iranian strikes remain symbolic without sustained military operations: 15%",
+    "source": "llm"
+  },
+  "501ca5ffd5457eae": {
+    "probability": 0.85,
+    "raw_quote": "Yes, Iran is highly likely to attempt to disrupt shipping through the Strait of Hormuz... **Probability:** **85%**",
+    "source": "llm"
+  },
+  "3ca16b07932f03b0": {
+    "probability": 0.85,
+    "raw_quote": "Probability of Further Direct Regional Involvement: 85%",
+    "source": "llm"
+  },
+  "ddcdce75afa40f81": {
+    "probability": 0.97,
+    "raw_quote": "Major airspace closures are already in effect. Reports indicate that Iran, Israel, Iraq, Jordan, Qatar, Bahrain, Kuwait, and the United Arab Emirates have shut their airspace.",
+    "source": "llm"
+  },
+  "c6ef202cfe9ebc0f": {
+    "probability": 0.85,
+    "raw_quote": "Probability that the conflict triggers internal rebellion within Iran: 85%",
+    "source": "llm"
+  },
+  "6043585110e5bbdf": {
+    "probability": 0.75,
+    "raw_quote": "**Probability: 75%**",
+    "source": "llm"
+  },
+  "fc7eb45b3b287ed2": {
+    "probability": 0.15,
+    "raw_quote": "Probability that Iranian strikes remain merely symbolic without sustained military operations: 15%",
+    "source": "llm"
+  },
+  "8b8d64254260536e": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "398929507505c9ca": {
+    "probability": 0.97,
+    "raw_quote": "Large-scale airspace closure has already been implemented across the region",
+    "source": "llm"
+  },
+  "fae97f9c79bba55d": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "80d849c4167cc0c0": {
+    "probability": 0.03,
+    "raw_quote": "Probability that Iranian strikes remain symbolic retaliation without sustained military operations: 3%",
+    "source": "llm"
+  },
+  "fbc1a37b12249f87": {
+    "probability": 0.97,
+    "raw_quote": "Probability that Iran attempts to disrupt shipping through the Strait of Hormuz: 0.97",
+    "source": "llm"
+  },
+  "be04c815eb74a785": {
+    "probability": 0.92,
+    "raw_quote": "Probability that additional countries beyond those already affected become directly involved in military operations (offensive or significant defensive): 0.92",
+    "source": "llm"
+  },
+  "c0bdf8a5759486fe": {
+    "probability": 0.99,
+    "raw_quote": "The probability that large-scale closure of Middle Eastern airspace is likely following these strikes: **0.99**",
+    "source": "llm"
+  },
+  "a6587789a0d9e346": {
+    "probability": 0.71,
+    "raw_quote": "Probability that the conflict triggers some form of internal rebellion/significant unrest: 75-80%",
+    "source": "llm"
+  },
+  "ab10919f6af5686c": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "aca1078bc429b4d4": {
+    "probability": 0.3,
+    "raw_quote": "approximately 28-32%",
+    "source": "llm"
+  },
+  "1a237a36dddeb03d": {
+    "probability": 0.07,
+    "raw_quote": "Overall probability that NATO as an institution becomes a formal belligerent expanding conflict into the Mediterranean theater in a meaningful offensive capacity: approximately 7%",
+    "source": "llm"
+  },
+  "054e11a59cb2d5cd": {
+    "probability": 0.78,
+    "raw_quote": "Overall probability that the conflict disrupts commercial shipping or maritime security in the Mediterranean: ~78%",
+    "source": "llm"
+  },
+  "b5eda8ef792c74cb": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "5d9a603107fae56b": {
+    "probability": 0.25,
+    "raw_quote": "Probability of direct UK offensive involvement: 25%",
+    "source": "llm"
+  },
+  "e7d80ed2c364637a": {
+    "probability": 0.15,
+    "raw_quote": "**15%**",
+    "source": "llm"
+  },
+  "c68a129b97b506d7": {
+    "probability": 0.85,
+    "raw_quote": "Probability: 85%",
+    "source": "llm"
+  },
+  "a76833cdd680c9f9": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f2497d97010e0232": {
+    "probability": 0.35,
+    "raw_quote": "Probability the UK becomes directly involved: 35%",
+    "source": "llm"
+  },
+  "7d333efed0e7f132": {
+    "probability": 0.25,
+    "raw_quote": "Probability NATO becomes directly involved, expanding the conflict into the Mediterranean theater: 25%",
+    "source": "llm"
+  },
+  "360a40c363ce00cd": {
+    "probability": 0.68,
+    "raw_quote": "Probability: 68%",
+    "source": "llm"
+  },
+  "bf0302e146c09317": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f134966ed4c595a8": {
+    "probability": 0.97,
+    "raw_quote": "the United Kingdom is **already directly involved** in the conflict",
+    "source": "llm"
+  },
+  "49af7e2877437627": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "cd4b9ea57ac53d95": {
+    "probability": 0.225,
+    "raw_quote": "Probability of the UK joining offensive operations against Iran: 20-25%",
+    "source": "llm"
+  },
+  "89e9cd74b63f0313": {
+    "probability": 0.15,
+    "raw_quote": "Probability: 15% (Low probability of formal NATO Mediterranean theater expansion within the immediate operational window",
+    "source": "llm"
+  },
+  "2d4f5e099034a35c": {
+    "probability": 0.7,
+    "raw_quote": "Probability: 70% (High likelihood of at least partial disruption to Mediterranean commercial shipping and maritime security within the next 30 days).",
+    "source": "llm"
+  },
+  "5e3c9b6371c56073": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "ed87a08de3f50461": {
+    "probability": 0.18,
+    "raw_quote": "Probability that the UK becomes directly involved in offensive military operations against Iran: 15-20%",
+    "source": "llm"
+  },
+  "9830e1b18e7aabe5": {
+    "probability": 0.07,
+    "raw_quote": "My estimate for formal NATO involvement expanding the conflict into the Mediterranean theater: ~7%",
+    "source": "llm"
+  },
+  "46198a9f2df3679a": {
+    "probability": 0.97,
+    "raw_quote": "Probability that the conflict disrupts commercial shipping or maritime security in the Mediterranean: 0.97",
+    "source": "llm"
+  },
+  "5f6b315da8291cc8": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "a5f4ec9b1602f1e2": {
+    "probability": 0.82,
+    "raw_quote": "Probability that Iran continues targeting oil tankers in an attempt to disrupt Strait of Hormuz traffic: 82%",
+    "source": "llm"
+  },
+  "68d6c623ce52b498": {
+    "probability": 0.55,
+    "raw_quote": "Overall probability of some form of organized naval escort mission for commercial shipping within 30 days: ~55%",
+    "source": "llm"
+  },
+  "676f6166241814c8": {
+    "probability": 0.68,
+    "raw_quote": "Overall probability that American naval forces establish escort missions to protect commercial shipping: approximately 65-70%",
+    "source": "llm"
+  },
+  "6221896bba5eb4cc": {
+    "probability": 0.68,
+    "raw_quote": "Overall probability that energy facilities (refineries, desalination plants, oil terminals) become primary targets: ~68%",
+    "source": "llm"
+  },
+  "bf8741a72f18cb93": {
+    "probability": 0.98,
+    "raw_quote": "Probability that these attacks lead to significant volatility in global oil prices: 98%",
+    "source": "llm"
+  },
+  "3181fb0837b949bd": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "3541cb32ee839ab5": {
+    "probability": 0.85,
+    "raw_quote": "Probability: 85%",
+    "source": "llm"
+  },
+  "ef9548e7e8c4d4d9": {
+    "probability": 0.3,
+    "raw_quote": "Probability: 30%",
+    "source": "llm"
+  },
+  "52d2c3d918ecca69": {
+    "probability": 0.3,
+    "raw_quote": "Probability of the US establishing naval escort missions in the next 14 days: 30%.",
+    "source": "llm"
+  },
+  "5c66e2c33e7d113a": {
+    "probability": 0.85,
+    "raw_quote": "Probability: 85%",
+    "source": "llm"
+  },
+  "b673d842e8ce56b8": {
+    "probability": 0.95,
+    "raw_quote": "Probability of significant volatility in global oil prices: 95%",
+    "source": "llm"
+  },
+  "62352cb324df0e98": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "eb0277ff0d0cf7f6": {
+    "probability": 0.72,
+    "raw_quote": "Probability: 72%",
+    "source": "llm"
+  },
+  "76b6629c673ead22": {
+    "probability": 0.7,
+    "raw_quote": "Probability of international/coalition naval escort missions being established in some form: 70%",
+    "source": "llm"
+  },
+  "12f6df35fc887138": {
+    "probability": 0.68,
+    "raw_quote": "Probability that American naval forces establish escort missions to protect commercial shipping: 68%",
+    "source": "llm"
+  },
+  "f7ef5623c476aa6b": {
+    "probability": 0.68,
+    "raw_quote": "Probability that energy facilities such as refineries, desalination plants, and oil terminals become primary targets in the near term: 68%",
+    "source": "llm"
+  },
+  "ad59958a8c254a87": {
+    "probability": 0.9,
+    "raw_quote": "Probability of significant global oil price volatility: 90%",
+    "source": "llm"
+  },
+  "6cac739484dd58c3": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "63f3f1799ddd1737": {
+    "probability": 0.8,
+    "raw_quote": "Probability: 80%",
+    "source": "llm"
+  },
+  "90f11b8deb94c730": {
+    "probability": 0.6,
+    "raw_quote": "**Probability:** 60%",
+    "source": "llm"
+  },
+  "85346c0002cd0ff3": {
+    "probability": 0.45,
+    "raw_quote": "Probability: 45%",
+    "source": "llm"
+  },
+  "a5eeb998bc1dfb48": {
+    "probability": 0.85,
+    "raw_quote": "**Probability:** **85%**",
+    "source": "llm"
+  },
+  "7ba5495729527677": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "d27f20af1b9e7a7d": {
+    "probability": 0.8,
+    "raw_quote": "Probability: 80%",
+    "source": "llm"
+  },
+  "297c570c68ebf725": {
+    "probability": 0.85,
+    "raw_quote": "very likely to continue targeting oil tankers",
+    "source": "llm"
+  },
+  "503cdb8cad130114": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "bd7e12f53eeabebd": {
+    "probability": 0.8,
+    "raw_quote": "Probability: 80%",
+    "source": "llm"
+  },
+  "85754e194852f615": {
+    "probability": 0.95,
+    "raw_quote": "Probability: 95%",
+    "source": "llm"
+  },
+  "8ba8f2c3bb5f3839": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "4499ac3957cdbfae": {
+    "probability": 0.92,
+    "raw_quote": "Probability: 0.92",
+    "source": "llm"
+  },
+  "0a80568a83a78a87": {
+    "probability": 0.72,
+    "raw_quote": "Probability: 0.72",
+    "source": "llm"
+  },
+  "320b643cd0e930cf": {
+    "probability": 0.92,
+    "raw_quote": "Probability: 0.92",
+    "source": "llm"
+  },
+  "94ab5ebe12e1b1fe": {
+    "probability": 0.82,
+    "raw_quote": "Probability that energy facilities become primary targets: 0.82",
+    "source": "llm"
+  },
+  "5d7111e0e3560188": {
+    "probability": 0.98,
+    "raw_quote": "Probability that these attacks lead to significant volatility in global oil prices: 0.98",
+    "source": "llm"
+  },
+  "65ac9de46ba398c4": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "5d2383a57d27d2ba": {
+    "probability": 0.8,
+    "raw_quote": "Overall probability of meaningful natural gas shortages affecting either Europe or Asia: ~80%",
+    "source": "llm"
+  },
+  "c187ebd2a84b5064": {
+    "probability": 0.88,
+    "raw_quote": "Probability that global natural gas prices increase significantly (>20% from pre-conflict levels) as a result of this conflict: ~88%",
+    "source": "llm"
+  },
+  "7699b5ab23e0e3aa": {
+    "probability": 0.58,
+    "raw_quote": "Probability that other LNG facilities or major energy infrastructure in the Gulf region become direct military targets within the next 30 days: 58%",
+    "source": "llm"
+  },
+  "b51e39f9d209d2f1": {
+    "probability": 0.97,
+    "raw_quote": "Probability that major energy-importing countries will seek alternative supply sources: 97%",
+    "source": "llm"
+  },
+  "2130e416867214aa": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "89d06306a88a25da": {
+    "probability": 0.85,
+    "raw_quote": "**Probability:** **85%**",
+    "source": "llm"
+  },
+  "02874f784e6589eb": {
+    "probability": 0.9,
+    "raw_quote": "Probability of a significant increase in global natural gas prices: 90%",
+    "source": "llm"
+  },
+  "d4bfe2bdced29dac": {
+    "probability": 0.85,
+    "raw_quote": "Probability: 85%",
+    "source": "llm"
+  },
+  "b3562125093db5b2": {
+    "probability": 0.9,
+    "raw_quote": "Probability of major energy-importing countries seeking and securing alternative, non-Gulf supply sources: 90%",
+    "source": "llm"
+  },
+  "59352b7cf8d2e238": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "1652ed8251b59b49": {
+    "probability": 0.5,
+    "raw_quote": "At least one of Europe or Asia facing notable shortage/tightness if disruption persists several weeks: 55%",
+    "source": "llm"
+  },
+  "1c4d4e929ee27f46": {
+    "probability": 0.82,
+    "raw_quote": "Probability: 82%",
+    "source": "llm"
+  },
+  "9cc2052a68aa59aa": {
+    "probability": 0.7,
+    "raw_quote": "Other Gulf energy infrastructure becoming targets: 70%",
+    "source": "llm"
+  },
+  "0d4bcdd5dd8f929c": {
+    "probability": 0.88,
+    "raw_quote": "Probability: 88%",
+    "source": "llm"
+  },
+  "d6edc48c2ef558ba": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "eccb6ec8e8b86a0c": {
+    "probability": 0.85,
+    "raw_quote": "This critical chokepoint, through which approximately 20-25% of global oil and a similar volume of Liquefied Natural Gas (LNG) passes daily, is under severe threat",
+    "source": "llm"
+  },
+  "23b138130f184673": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "91a93fb75dcac090": {
+    "probability": 0.95,
+    "raw_quote": "**Probability:** 95%",
+    "source": "llm"
+  },
+  "b2ba8298691aa06f": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "0131257a1472ef3a": {
+    "probability": 0.875,
+    "raw_quote": "Probability: 85-90% chance of significant global natural gas price increases",
+    "source": "llm"
+  },
+  "d2b7f68b60071091": {
+    "probability": 0.75,
+    "raw_quote": "**Probability: 75%** (High likelihood)",
+    "source": "llm"
+  },
+  "20793dbd6127eecd": {
+    "probability": 0.9,
+    "raw_quote": "Probability: 90%",
+    "source": "llm"
+  },
+  "5e150f1f6e166547": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "e11698afca830e27": {
+    "probability": 0.82,
+    "raw_quote": "Probability that Qatar's situation leads to meaningful natural gas shortages in Europe or Asia: 0.82",
+    "source": "llm"
+  },
+  "bf7315cf96e5e197": {
+    "probability": 0.97,
+    "raw_quote": "Probability: 0.97",
+    "source": "llm"
+  },
+  "70ba0711c310e69a": {
+    "probability": 0.75,
+    "raw_quote": "Probability that other LNG facilities or energy infrastructure in the Gulf region could become direct targets during this conflict: 0.75",
+    "source": "llm"
+  },
+  "d25e4a4deaf840f2": {
+    "probability": 0.98,
+    "raw_quote": "Probability: 0.98",
+    "source": "llm"
+  },
+  "d476000742b5c9b4": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "15dfdc9be9ad0801": {
+    "probability": 0.78,
+    "raw_quote": "Probability that the US and Israel will continue targeting Iranian nuclear facilities: 78%",
+    "source": "llm"
+  },
+  "6ccd4be30d13f14b": {
+    "probability": 0.42,
+    "raw_quote": "Probability that Israel's nuclear-related infrastructure sustains some measurable damage: ~42%",
+    "source": "llm"
+  },
+  "64ede272dd544167": {
+    "probability": 0.65,
+    "raw_quote": "Probability that Iran will meaningfully withdraw from (or materially violate) nuclear non-proliferation commitments within 6 months: ~65%",
+    "source": "llm"
+  },
+  "a4eabf26233264db": {
+    "probability": 0.015,
+    "raw_quote": "Overall probability: approximately 1-2%... Consolidated estimate: ~1.5%",
+    "source": "llm"
+  },
+  "c77b7ba01ee53362": {
+    "probability": 0.65,
+    "raw_quote": "**Probability: 65%**",
+    "source": "llm"
+  },
+  "bc0573fe5b2bb96f": {
+    "probability": 0.8,
+    "raw_quote": "Probability: 80%",
+    "source": "llm"
+  },
+  "43f7f2be89e5961d": {
+    "probability": 0.65,
+    "raw_quote": "Probability: 65%",
+    "source": "llm"
+  },
+  "8ffd01043eef0f9a": {
+    "probability": 0.9,
+    "raw_quote": "the probability that Iran will formally withdraw from its nuclear non-proliferation commitments is **90%**",
+    "source": "llm"
+  },
+  "80433ffb4623c0e0": {
+    "probability": 0.01,
+    "raw_quote": "Probability of nuclear weapon use: <1%",
+    "source": "llm"
+  },
+  "1dffd8a60265a588": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "172fac8d2122fd01": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "3ff03ac3b7f84812": {
+    "probability": 0.38,
+    "raw_quote": "Any damage: 38%",
+    "source": "llm"
+  },
+  "3dc0a844be62354f": {
+    "probability": 0.7,
+    "raw_quote": "Probability that Iran withdraws from nuclear non-proliferation commitments in a meaningful way: 70%",
+    "source": "llm"
+  },
+  "93919021de2ba55f": {
+    "probability": 0.075,
+    "raw_quote": "Estimated probability of actual nuclear weapon use in this conflict as it currently stands: 5\u201310%",
+    "source": "llm"
+  },
+  "1298a3bac02b93fc": {
+    "probability": 0.15,
+    "raw_quote": "Probability of Israel's nuclear-related infrastructure being damaged: Low (15%)",
+    "source": "llm"
+  },
+  "85ac1a1f9da09d5a": {
+    "probability": 0.15,
+    "raw_quote": "Low (15%)",
+    "source": "llm"
+  },
+  "9f283dd3863ed786": {
+    "probability": 0.85,
+    "raw_quote": "Probability: 85%",
+    "source": "llm"
+  },
+  "399d549d08738efe": {
+    "probability": 0.015,
+    "raw_quote": "Probability of nuclear weapons use: 1-2% (Very Low)",
+    "source": "llm"
+  },
+  "9a956adb238715f5": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "3627e32619cc5feb": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "e2c84c408983834d": {
+    "probability": 0.8,
+    "raw_quote": "**Probability: 80%** (High probability)",
+    "source": "llm"
+  },
+  "ede06c1247da1df3": {
+    "probability": 0.015,
+    "raw_quote": "Probability of nuclear weapons use: 1-2% (Very Low)",
+    "source": "llm"
+  },
+  "bb3c35ec78148add": {
+    "probability": 0.3,
+    "raw_quote": "I'll estimate **0.30** (30%)",
+    "source": "llm"
+  },
+  "5826fec754438b91": {
+    "probability": 0.93,
+    "raw_quote": "Probability: 0.93",
+    "source": "llm"
+  },
+  "80926750c6778274": {
+    "probability": 0.3,
+    "raw_quote": "Probability that Israel's nuclear-related infrastructure will be damaged: 25-35%... I'll estimate **0.30** (30%)",
+    "source": "llm"
+  },
+  "7ed82cd65971b774": {
+    "probability": 0.92,
+    "raw_quote": "Probability that Iran withdraws from nuclear non-proliferation commitments: 0.92",
+    "source": "llm"
+  },
+  "880aa827e7560639": {
+    "probability": 0.015,
+    "raw_quote": "Probability of nuclear weapons being used as part of this conflict: 1-2%",
+    "source": "llm"
+  },
+  "4c854c647ded8423": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "a8ae35a2822680dc": {
+    "probability": 0.92,
+    "raw_quote": "Probability that multiple countries will begin or escalate formal citizen evacuation operations from the Gulf region: ~92%",
+    "source": "llm"
+  },
+  "6500d9b6f7bef9cc": {
+    "probability": 0.18,
+    "raw_quote": "Probability of US Ground Force Deployment: 18%",
+    "source": "llm"
+  },
+  "084535d0e189fc04": {
+    "probability": 0.91,
+    "raw_quote": "Probability that foreign governments will close or reduce operations at diplomatic missions in the region: 91%",
+    "source": "llm"
+  },
+  "123044f668f0d3e9": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "b85b50e37cfacae7": {
+    "probability": 0.9,
+    "raw_quote": "**Probability:** **90%**",
+    "source": "llm"
+  },
+  "8dd67c6c67b565c0": {
+    "probability": 0.65,
+    "raw_quote": "Probability of US ground force deployment: 65%",
+    "source": "llm"
+  },
+  "d1d7db07c6c75ecc": {
+    "probability": 0.9,
+    "raw_quote": "Probability: 90% (It is highly probable that foreign governments will either fully close secondary missions or reduce operations at primary embassies to a bare-minimum, \"emergency-only\" capacity over the coming days.)",
+    "source": "llm"
+  },
+  "f1abfde2f8d683e3": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "632091828ca197ab": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75%",
+    "source": "llm"
+  },
+  "a4511230676116ae": {
+    "probability": 0.55,
+    "raw_quote": "Any US ground-force deployment related to the conflict (including limited raids / coastal operations / force expansion): 55%",
+    "source": "llm"
+  },
+  "082ab7a2e8fee4e3": {
+    "probability": 0.75,
+    "raw_quote": "Probability that foreign governments close or reduce operations at at least some diplomatic missions in the region in the near term: 75%",
+    "source": "llm"
+  },
+  "9c0b6801ac47232b": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "ba6e6e356535065b": {
+    "probability": 0.55,
+    "raw_quote": "Probability: 55%",
+    "source": "llm"
+  },
+  "3568d62a3c977cbf": {
+    "probability": 0.9,
+    "raw_quote": "**Probability:** 90%",
+    "source": "llm"
+  },
+  "66ba4a01104a1267": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "67b68cb3d2194ab2": {
+    "probability": 0.85,
+    "raw_quote": "yes, other countries are highly likely to begin evacuating their citizens from the region",
+    "source": "llm"
+  },
+  "340ac6fad0db5789": {
+    "probability": 0.65,
+    "raw_quote": "**Probability:** **65%**",
+    "source": "llm"
+  },
+  "43daaef2248db72b": {
+    "probability": 0.85,
+    "raw_quote": "highly likely to close or significantly reduce operations",
+    "source": "llm"
+  },
+  "20654ce508b90d0c": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f777a26697ff205e": {
+    "probability": 0.97,
+    "raw_quote": "Probability that other countries will begin evacuating their citizens from the region: 0.97",
+    "source": "llm"
+  },
+  "be9cc6f332e938e4": {
+    "probability": 0.5,
+    "raw_quote": "Probability that the United States deploys ground forces (in some capacity, including limited operations to secure Hormuz-related objectives) if the conflict escalates further: 45-55%",
+    "source": "llm"
+  },
+  "df074c9f19a74b1a": {
+    "probability": 0.97,
+    "raw_quote": "makes further diplomatic drawdowns nearly certain. **Probability: 0.97**",
+    "source": "llm"
+  },
+  "7fd716fe00db6a76": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "d853c891acc2c3b8": {
+    "probability": 0.72,
+    "raw_quote": "Probability that the conflict expands further to involve additional countries in a meaningful way: 72%",
+    "source": "llm"
+  },
+  "adfecc48806bc94e": {
+    "probability": 0.2,
+    "raw_quote": "Multiple countries (3+) conducting simultaneous ground operations: 18%; Overall probability of multiple countries initiating significant ground operations: approximately 18-22%",
+    "source": "llm"
+  },
+  "7fdb39d6987afa98": {
+    "probability": 0.12,
+    "raw_quote": "~12%",
+    "source": "llm"
+  },
+  "a748b7e8a19d18ce": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "0a5f9f86ba11f9bd": {
+    "probability": 0.85,
+    "raw_quote": "Probability of further expansion: 85%",
+    "source": "llm"
+  },
+  "ade290884e28b5ba": {
+    "probability": 0.65,
+    "raw_quote": "Probability of multiple countries initiating ground operations: 65%",
+    "source": "llm"
+  },
+  "1dd3b4ae620c800a": {
+    "probability": 0.1,
+    "raw_quote": "**10%** (The probability is extremely low, limited only to possible covert, small-scale efforts to maintain the relationship, but large-scale military/logistical support is effectively impossible under current conditions.)",
+    "source": "llm"
+  },
+  "2081f7f5932af335": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "721d4d7491147a88": {
+    "probability": 0.7,
+    "raw_quote": "Probability that additional countries become more directly involved: 70%",
+    "source": "llm"
+  },
+  "ef81cd3dd4a95fa5": {
+    "probability": 0.55,
+    "raw_quote": "Probability of some form of multi-country ground operations (including limited raids / Lebanon front / proxy-linked ground escalation): 55%",
+    "source": "llm"
+  },
+  "693ad2918d68d350": {
+    "probability": 0.68,
+    "raw_quote": "Probability: 68%",
+    "source": "llm"
+  },
+  "810f1e86d112bf56": {
+    "probability": 0.8,
+    "raw_quote": "**Probability:** 80%",
+    "source": "llm"
+  },
+  "7e5c2e67005acd76": {
+    "probability": 0.8,
+    "raw_quote": "**Probability:** 80%",
+    "source": "llm"
+  },
+  "ea896f9bde207cbb": {
+    "probability": 0.8,
+    "raw_quote": "**Probability:** 80%",
+    "source": "llm"
+  },
+  "e9d152493cbda1ff": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "45a5ec62a6adf212": {
+    "probability": 0.85,
+    "raw_quote": "high likelihood of further expansion",
+    "source": "llm"
+  },
+  "76f8402c76d0e9cc": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "8b4c4270d244a828": {
+    "probability": 0.2,
+    "raw_quote": "**Probability:** **20% (Unlikely)**",
+    "source": "llm"
+  },
+  "6a9e52ce2d3e4d67": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "cc456580ce9b8fd6": {
+    "probability": 0.92,
+    "raw_quote": "Probability that the conflict expands further to involve additional countries: 0.92",
+    "source": "llm"
+  },
+  "86c9dd0aa13b4594": {
+    "probability": 0.72,
+    "raw_quote": "Probability that multiple countries initiate ground operations as the war escalates: 0.72",
+    "source": "llm"
+  },
+  "974d5f2bb56f57ef": {
+    "probability": 0.1,
+    "raw_quote": "Probability that Iran increases military or logistical support for Hezbollah: 10%",
+    "source": "llm"
+  },
+  "d7ce606d65935657": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "c7c326ab48e08c32": {
+    "probability": 0.25,
+    "raw_quote": "Probability that new leadership pursues primarily military escalation over negotiation: ~25%",
+    "source": "llm"
+  },
+  "e66cfc90f59a8a14": {
+    "probability": 0.15,
+    "raw_quote": "Probability that the US and Israel will target the new formal interim leadership structure (the three-member council) in deliberate strikes: ~15%",
+    "source": "llm"
+  },
+  "5731585f565e1340": {
+    "probability": 0.82,
+    "raw_quote": "Overall probability that the leadership transition triggers notable domestic unrest or protests in Iran: approximately 82%",
+    "source": "llm"
+  },
+  "3fc4589f8443e976": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "c50fca6b2d2f9b01": {
+    "probability": 0.75,
+    "raw_quote": "Probability of prioritizing military retaliation over negotiations: 75%",
+    "source": "llm"
+  },
+  "e6210f7d3f0099e2": {
+    "probability": 0.85,
+    "raw_quote": "It is highly likely that the US and Israel will continue to target the new leadership structure",
+    "source": "llm"
+  },
+  "bbb126dcc99977c9": {
+    "probability": 0.85,
+    "raw_quote": "Probability of significant domestic unrest or protests: 85%",
+    "source": "llm"
+  },
+  "55988e8e2e880ebc": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "e81edb7052d5ab86": {
+    "probability": 0.7,
+    "raw_quote": "Probability that the new leadership is more likely to escalate military retaliation rather than pursue negotiations in the near term: 70%",
+    "source": "llm"
+  },
+  "3f900fd5ebd08501": {
+    "probability": 0.6,
+    "raw_quote": "more likely than not",
+    "source": "llm"
+  },
+  "1c196e5ecedd73bc": {
+    "probability": 0.65,
+    "raw_quote": "Estimated probability of meaningful domestic unrest/protests triggered or intensified by the transition: 65%",
+    "source": "llm"
+  },
+  "c555582774ef4a00": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "537ff80d427445ab": {
+    "probability": 0.65,
+    "raw_quote": "Probability of Escalation over Negotiation: 65%",
+    "source": "llm"
+  },
+  "12e711bfdcf01089": {
+    "probability": 0.75,
+    "raw_quote": "**Probability:** 75%",
+    "source": "llm"
+  },
+  "af5560303541d89c": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "251a10b7c4dfef00": {
+    "probability": 0.7,
+    "raw_quote": "more likely to continue military retaliation in the immediate term rather than pursue direct negotiations",
+    "source": "llm"
+  },
+  "fa361c1bd1e8e8fe": {
+    "probability": 0.85,
+    "raw_quote": "making further strikes against Iran's new interim leadership highly probable",
+    "source": "llm"
+  },
+  "6a96d45250f98a55": {
+    "probability": 0.85,
+    "raw_quote": "highly likely to trigger or exacerbate domestic unrest",
+    "source": "llm"
+  },
+  "a85c8287aa74daad": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "523a8fa0a34a3c85": {
+    "probability": 0.25,
+    "raw_quote": "Probability that the new leadership is more likely to escalate military retaliation rather than pursue negotiations: 0.25",
+    "source": "llm"
+  },
+  "9de208379c01eec3": {
+    "probability": 0.27,
+    "raw_quote": "Probability that the US and Israel will deliberately target the new interim leadership council members in further strikes: 25-30%",
+    "source": "llm"
+  },
+  "550f2cf53bb44a06": {
+    "probability": 0.97,
+    "raw_quote": "Probability that the leadership transition triggers domestic unrest or protests in Iran: 0.97",
+    "source": "llm"
+  },
+  "249a9a75c0af7b27": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "f7d0b2a0b0d6e89e": {
+    "probability": 0.18,
+    "raw_quote": "Probability that Iran will significantly reduce or halt attacks on neighboring Gulf states within the next 2 weeks: ~18%",
+    "source": "llm"
+  },
+  "a4a91d3af1053a63": {
+    "probability": 0.38,
+    "raw_quote": "Probability that Iran begins pursuing ceasefire negotiations or diplomatic talks within the next 2-4 weeks: ~35-40%",
+    "source": "llm"
+  },
+  "8a8ecef3df4af4af": {
+    "probability": 0.97,
+    "raw_quote": "Probability that international actors (EU/UN) will actively push for negotiations: 97% \u2014 this is already occurring and will intensify",
+    "source": "llm"
+  },
+  "56558baa82cb18fe": {
+    "probability": 0.12,
+    "raw_quote": "Probability that overall conflict intensity begins to meaningfully decrease within the next 7 days: ~12%",
+    "source": "llm"
+  },
+  "1cc74aa84acef51e": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "ac5ce8fea5adc0fa": {
+    "probability": 0.1,
+    "raw_quote": "Probability: 10%",
+    "source": "llm"
+  },
+  "a9eb62744375a987": {
+    "probability": 0.05,
+    "raw_quote": "Probability of Iran pursuing ceasefire negotiations or diplomatic talks in the next 14 days: 5%",
+    "source": "llm"
+  },
+  "60ab220d29e292c3": {
+    "probability": 0.95,
+    "raw_quote": "Probability that the EU or UN will push for negotiations: 95%",
+    "source": "llm"
+  },
+  "95970b65bc7b3516": {
+    "probability": 0.1,
+    "raw_quote": "Probability of the overall intensity of the conflict beginning to decrease in the next 7 days: 10%",
+    "source": "llm"
+  },
+  "096d9ca93ee6860d": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "800e35fa4edb3dd1": {
+    "probability": 0.35,
+    "raw_quote": "Probability Iran reduces or halts attacks on neighboring Gulf states in the near term: 35%",
+    "source": "llm"
+  },
+  "8016716f4fde9c37": {
+    "probability": 0.7,
+    "raw_quote": "Probability Iran begins pursuing some form of ceasefire/diplomatic talks in the near term: 70%",
+    "source": "llm"
+  },
+  "d132086e6ac7c071": {
+    "probability": 0.88,
+    "raw_quote": "Probability: 88%",
+    "source": "llm"
+  },
+  "5e0a3fb3be6f0bf7": {
+    "probability": 0.58,
+    "raw_quote": "Probability that the overall intensity begins to decrease within the next 1\u20133 weeks: 58%",
+    "source": "llm"
+  },
+  "4a0f6221d94fb871": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "c9fa376d27767c37": {
+    "probability": 0.65,
+    "raw_quote": "Overall Probability of Ceasefire/Diplomatic Talks Initiating in the Near Term: 65%",
+    "source": "llm"
+  },
+  "e4fe42c23440ae81": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "b7e0412e2af5e024": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "d5810511ab068c66": {
+    "probability": 0.6,
+    "raw_quote": "Iran could potentially pursue ceasefire negotiations or diplomatic talks",
+    "source": "llm"
+  },
+  "3c286052311ca587": {
+    "probability": 0.75,
+    "raw_quote": "Probability: 75% (High likelihood of intensified diplomatic pressure for negotiations",
+    "source": "llm"
+  },
+  "dc54b9947708a0de": {
+    "probability": 0.6,
+    "raw_quote": "yes, the overall intensity could begin to decrease",
+    "source": "llm"
+  },
+  "34e6aebc2f293ff4": {
+    "probability": null,
+    "raw_quote": null,
+    "source": "none"
+  },
+  "8d2801c76c9e119a": {
+    "probability": 0.12,
+    "raw_quote": "Probability that Iran will significantly reduce or halt attacks on Gulf states within the next two weeks: 10-15%",
+    "source": "llm"
+  },
+  "3390357a700649a7": {
+    "probability": 0.85,
+    "raw_quote": "Probability that Iran begins pursuing ceasefire negotiations or diplomatic talks: 0.85",
+    "source": "llm"
+  },
+  "248272811601d0ef": {
+    "probability": 0.97,
+    "raw_quote": "Probability that international actors such as the EU or UN will push for negotiations following this signal: 0.97",
+    "source": "llm"
+  },
+  "9179888367443208": {
+    "probability": 0.075,
+    "raw_quote": "Probability that the overall intensity of the conflict begins to decrease in the near term (next 1-2 weeks): 5-10%",
+    "source": "llm"
+  }
+}

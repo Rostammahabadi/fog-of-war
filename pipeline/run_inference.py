@@ -89,9 +89,13 @@ class LLMRunner:
                 timeout=TIMEOUT
             )
 
+            content = response.choices[0].message.content
+            if not content or len(content.strip()) == 0:
+                raise ValueError(f"Empty response from {model} (likely content filter)")
+
             return {
                 "success": True,
-                "response": response.choices[0].message.content,
+                "response": content,
                 "model": model,
                 "usage": response.usage.model_dump() if response.usage else None,
                 "timestamp": datetime.now(timezone.utc).isoformat()

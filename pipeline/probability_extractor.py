@@ -82,7 +82,9 @@ class LLMProbabilityExtractor:
         if not self.client:
             return {"probability": None, "raw_quote": None, "source": "none"}
 
-        truncated = response_text[:truncate_len]
+        # Take from the END of the response — the prompt asks models to
+        # "provide the probability" at the end, so that's where it is.
+        truncated = response_text[-truncate_len:]
 
         try:
             resp = self.client.chat.completions.create(
