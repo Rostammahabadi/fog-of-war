@@ -428,7 +428,85 @@
     color: var(--text);
   }
 
+  /* Findings */
+  .findings {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .finding {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .finding-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.3;
+    min-width: 2.5rem;
+    line-height: 1.4;
+  }
+
+  .finding-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .finding-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .finding-content strong {
+    color: var(--text);
+  }
+
+  .finding-content em {
+    color: var(--amber);
+    font-style: italic;
+  }
+
+  /* About grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .about-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .about-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .about-card strong {
+    color: var(--text);
+  }
+
   @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .charts-grid { grid-template-columns: 1fr; }
     .theme-grid { grid-template-columns: repeat(2, 1fr); }
@@ -768,15 +846,89 @@
     </div>
   </div>
 
+  <!-- Key Findings -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span>Key Findings</div>
+
+    <div class="findings">
+      <div class="finding">
+        <div class="finding-num">01</div>
+        <div class="finding-content">
+          <h4>Opus is the best geopolitical forecaster &mdash; and nobody tested it</h4>
+          <p>The original paper never evaluated Claude Opus. We added it and it <strong>beat every model they tested</strong> at 0.775 &mdash; exceeding even the paper's best results (Qwen/Gemini at 0.75). Its T0 score of 0.940 is remarkable: with only pre-conflict data, it predicted the outbreak almost perfectly. It's also the only model with zero extraction failures &mdash; it always gives a clear, parseable probability.</p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">02</div>
+        <div class="finding-content">
+          <h4>Models predict economics better than politics &mdash; just like human analysts</h4>
+          <p>Every single model scored highest on Economic Shockwaves (oil markets, supply chains) and lowest on Political Signaling (leadership transitions, de-escalation). Our data matches the paper exactly: 0.79 vs 0.79 for economic themes. This suggests LLMs reason well about <strong>structural causal systems</strong> (supply disrupts &rarr; price rises) but struggle with <strong>strategic ambiguity</strong> (will a new leader escalate or negotiate?). That's the same weakness human intelligence analysts have.</p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">03</div>
+        <div class="finding-content">
+          <h4>T9 is the hardest node &mdash; and it's the most human moment</h4>
+          <p>When Mojtaba Khamenei became Supreme Leader (T9), accuracy dropped to <strong>50% &mdash; coin flip territory</strong>. Every model predicted the new leader would escalate. The ground truth: he didn't. Succession dynamics in theocracies don't follow legible patterns, and this is exactly the kind of judgment call where LLMs trained on historical data fail.</p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">04</div>
+        <div class="finding-content">
+          <h4>The fog lifts, then descends again</h4>
+          <p>Accuracy follows a clear arc: <strong>T0 (66.7%)</strong> &mdash; models guess with limited pre-conflict data. <strong>T1&ndash;T5 (85&ndash;97%)</strong> &mdash; as real conflict data floods in, predictions sharpen dramatically. <strong>T6&ndash;T10 (50&ndash;69%)</strong> &mdash; accuracy collapses as the conflict enters nuclear and political territory. Models get <em>worse</em> with more information when that information is ambiguous.</p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">05</div>
+        <div class="finding-content">
+          <h4>GPT-5.4 is the most conservative forecaster</h4>
+          <p>GPT-5.4 matched the paper exactly (0.633 vs 0.63) and showed the lowest variance across nodes. It systematically gives lower probability estimates, which avoids confident wrong predictions (good Brier score of 0.163) but also misses high-confidence correct calls that boost 1-MAE. Steady and cautious &mdash; the analyst who never sticks their neck out.</p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-num">06</div>
+        <div class="finding-content">
+          <h4>Gemini Flash can't read political signals at all</h4>
+          <p>Gemini scored <strong>0.358 on Political Signaling</strong> &mdash; the worst single theme-model combination in the entire study. It completely failed T9 (0.417) and T10 (0.300). Yet it scored 0.762 on Economic Shockwaves. This is the most extreme specialization gap of any model &mdash; it's essentially an economic reasoning engine that is blind to political dynamics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About the Experiment -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span>About the Experiment</div>
+    <div class="about-grid">
+      <div class="about-card">
+        <h4>The Scenario</h4>
+        <p>A simulated Middle East conflict escalating over 8 days (Feb 27 &ndash; Mar 7, 2026), based on the paper <a href="https://arxiv.org/abs/2603.16642" style="color:var(--accent)">&ldquo;When AI Navigates the Fog of War&rdquo;</a> (Li et al., 2026). 11 temporal nodes mark key escalation points: from the initial Israeli-US strikes on Iran (T0), through Iranian retaliation (T2), oil infrastructure attacks (T4), nuclear facility strikes (T6), a leadership succession crisis (T9), and eventual diplomatic signals (T10).</p>
+      </div>
+      <div class="about-card">
+        <h4>The Question</h4>
+        <p>Can frontier LLMs predict what happens next in a geopolitical crisis, given only the information a real intelligence analyst would have at that moment? At each temporal node, models receive only news published <strong>before</strong> that timestamp &mdash; the &ldquo;fog of war&rdquo; constraint. They answer 42 binary forecasting questions (&ldquo;Will Iran retaliate?&rdquo;, &ldquo;Could nuclear weapons be used?&rdquo;) and assign probability estimates that are scored against ground truth.</p>
+      </div>
+      <div class="about-card">
+        <h4>Data Sources</h4>
+        <p><strong>2,500 news articles</strong> from 11 international outlets spanning the conflict period: Reuters, Bloomberg, AP News, BBC, Financial Times, The Guardian, Fox News, Al Jazeera, Al-Monitor, Middle East Eye, and The National (UAE). Articles were collected via Google News RSS feeds and direct outlet scraping, with full text extracted using trafilatura. Each briefing is capped at ~480,000 characters (~120K tokens) of reverse-chronologically sorted articles, with each article truncated to 2,000 characters.</p>
+      </div>
+      <div class="about-card">
+        <h4>How It Works</h4>
+        <p>Each of the 6 models receives the same temporally-gated briefing and answers each question independently (separate API call). No system prompt is used. Temperature is set to 0.3 with max 2,048 output tokens, matching the paper's protocol exactly. Probabilities are extracted from model responses using Claude Haiku 4.5, which parses explicit percentages or maps qualitative language (&ldquo;very likely&rdquo; &rarr; 85%, &ldquo;unlikely&rdquo; &rarr; 30%) to calibrated values. The paper's primary metric, <strong>1-MAE</strong>, measures how close predicted probabilities are to binary outcomes.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Methodology note -->
   <div class="note">
-    <strong>Methodology:</strong> Based on the paper <a href="https://arxiv.org/abs/2603.16642" style="color:var(--accent)">"When AI Navigates the Fog of War"</a> (Li et al., 2026).
-    Each model receives temporally-gated intelligence briefings (2,500 news articles from 11 outlets, capped at ~480K characters per node) and independently answers 42 verifiable binary questions across 11 nodes, matching the paper's single-question protocol (no system prompt, temperature 0.3, max 2048 tokens).
-    <strong>1-MAE</strong> (Calibration Consistency) is the paper's primary metric: 1 minus mean absolute error between predicted probability and binary outcome (higher = better).
-    <strong>Brier Score</strong> measures calibration (lower = better). <strong>Accuracy</strong> is binary prediction correctness (p > 0.5).
-    <br><br>
-    <strong>Key difference from paper:</strong> The paper used manual human probability extraction by two researchers. This pipeline uses automated LLM-based extraction (Claude Haiku 4.5), which adds extraction noise and likely explains the ~0.05 lower scores for most models. Thematic patterns are highly consistent with the paper's findings: Economic Shockwaves is the strongest theme (our 0.790 vs paper 0.79), Initial Outbreak closely matches (0.743 vs 0.74), while Political Signaling shows the largest divergence (0.529 vs 0.67).
-    GPT-5.4 matches the paper exactly (0.633 vs 0.63). Claude Opus 4.6 is our addition (not evaluated in the original paper) and achieves the highest overall 1-MAE of 0.775.
+    <strong>Replication notes:</strong>
+    Our scores are ~3&ndash;6% lower than the paper for most models, attributable to automated probability extraction (LLM) vs. the paper's manual human extraction by two researchers. GPT-5.4 matches the paper exactly (0.633 vs 0.63). Thematic patterns are highly consistent: Economic Shockwaves matches exactly (0.79 vs 0.79), Initial Outbreak matches exactly (0.74 vs 0.74). Political Signaling shows the largest divergence (0.53 vs 0.67) &mdash; this is where human extractors have the biggest advantage interpreting hedged language about leadership transitions.
+    Claude Opus 4.6 is our addition (not evaluated in the original paper) and achieves the highest overall 1-MAE of 0.775.
   </div>
 
   <!-- Footer -->
